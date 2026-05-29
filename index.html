@@ -4,111 +4,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🌟 Save the Sunshine Playroom</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;min-height:100vh;background:#FEF9F0}
-.fredoka{font-family:'Fredoka One',cursive}
-.container{max-width:780px;margin:0 auto;padding:16px 20px}
-.card{background:#fff;border-radius:22px;box-shadow:0 4px 20px rgba(0,0,0,.07);padding:26px}
-.fadein{animation:fadein .35s ease-out}
-@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pop{from{transform:scale(.55);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.blob-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(72px);opacity:.16}
-.b1{width:500px;height:500px;background:#FFD93D;top:-120px;left:-120px;animation:float 9s ease-in-out infinite}
-.b2{width:400px;height:400px;background:#FF6B6B;top:38%;right:-90px;animation:float 11s ease-in-out infinite reverse}
-.b3{width:330px;height:330px;background:#4ECDC4;bottom:-70px;left:38%;animation:float 8s ease-in-out infinite 2s}
-.btn{border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;border-radius:50px;padding:11px 24px;font-size:.94rem;transition:transform .15s,box-shadow .15s;display:inline-flex;align-items:center;gap:7px}
-.btn:active{transform:scale(.97)!important}
-.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
-.btn-yellow{background:#FFD93D;color:#333;box-shadow:0 4px 0 #E0AC00}
-.btn-yellow:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 #E0AC00}
-.btn-coral{background:#FF6B6B;color:#fff;box-shadow:0 4px 0 #C83F3F}
-.btn-coral:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 #C83F3F}
-.btn-blue{background:#4ECDC4;color:#fff;box-shadow:0 4px 0 #28A098}
-.btn-blue:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 #28A098}
-.btn-green{background:#6BCB77;color:#fff;box-shadow:0 4px 0 #3E9948}
-.btn-green:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 #3E9948}
-.btn-purple{background:#C77DFF;color:#fff;box-shadow:0 4px 0 #8B40CC}
-.btn-purple:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 #8B40CC}
-.btn-orange{background:#FF9F43;color:#fff;box-shadow:0 4px 0 #C86C10}
-.btn-orange:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 #C86C10}
-.btn-gray{background:#E0E0E0;color:#666}
-.btn-gray:hover:not(:disabled){background:#D0D0D0}
-.btn-lg{font-size:1.08rem;padding:14px 34px}
-.btn-sm{font-size:.8rem;padding:7px 15px}
-.btn-w{justify-content:center;width:100%}
-input{font-family:'Nunito',sans-serif;border:2px solid #E8E8E8;border-radius:12px;padding:11px 14px;font-size:.94rem;width:100%;outline:none;transition:border-color .2s,box-shadow .2s}
-input:focus{border-color:#4ECDC4;box-shadow:0 0 0 3px rgba(78,205,196,.15)}
-.header{background:#fff;border-bottom:2px solid #F0F0F0;padding:10px 0;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.score-pill{background:linear-gradient(135deg,#FFD93D,#FF9F43);color:#fff;padding:6px 18px;border-radius:50px;font-weight:800;font-size:.98rem;white-space:nowrap;box-shadow:0 3px 10px rgba(255,159,67,.3)}
-.reading-text{background:#FFF8EE;border-left:4px solid #FF9F43;padding:17px;border-radius:0 14px 14px 0;line-height:1.75;font-size:.91rem;margin-bottom:16px}
-.qcm-opt{display:flex;align-items:center;gap:10px;padding:12px 15px;border:2px solid #EBEBEB;border-radius:13px;cursor:pointer;transition:all .17s;margin-bottom:8px;font-weight:600;font-size:.91rem}
-.qcm-opt:hover{border-color:#4ECDC4;background:#F0FFFE}
-.qcm-opt.sel{border-color:#4ECDC4;background:#E5F9F8}
-.qcm-opt.right{border-color:#6BCB77;background:#EDFAEF}
-.qcm-opt.wrong{border-color:#FF6B6B;background:#FFF0F0}
-.qcm-letter{width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;flex-shrink:0;transition:all .17s}
-.vf-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border:2px solid #EBEBEB;border-radius:13px;margin-bottom:8px;transition:all .17s}
-.vf-btn{padding:6px 15px;border-radius:50px;border:2px solid;cursor:pointer;font-weight:700;font-size:.82rem;transition:all .17s;font-family:'Nunito',sans-serif}
-.vf-t{border-color:#6BCB77;color:#6BCB77;background:#fff}
-.vf-t.on{background:#6BCB77;color:#fff}
-.vf-f{border-color:#FF6B6B;color:#FF6B6B;background:#fff}
-.vf-f.on{background:#FF6B6B;color:#fff}
-.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.match-item{padding:10px 13px;border:2px solid #EBEBEB;border-radius:11px;cursor:pointer;font-weight:600;font-size:.86rem;min-height:52px;display:flex;align-items:center;transition:all .17s;line-height:1.35}
-.match-item:hover:not(.used):not(.ok):not(.ko){border-color:#C77DFF;background:#F9F0FF}
-.match-item.selected{border-color:#C77DFF;background:#F3E8FF;box-shadow:0 0 0 3px rgba(199,125,255,.18)}
-.match-item.used{opacity:.42;cursor:default;border-style:dashed}
-.match-item.ok{border-color:#6BCB77;background:#EDF9EF;opacity:1;cursor:default}
-.match-item.ko{border-color:#FF6B6B;background:#FFF0F0;opacity:1;cursor:default}
-.sit-card{background:linear-gradient(135deg,#E8F7FE,#EDF8F0);border:2px solid #4ECDC4;border-radius:17px;padding:20px}
-.sit-lbl{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#4ECDC4;margin-bottom:3px}
-.sit-val{font-weight:600;color:#2D3436;margin-bottom:13px;line-height:1.5;font-size:.93rem}
-.hint{background:#FFF8E1;border:2px dashed #FFD93D;border-radius:12px;padding:10px 14px;font-size:.87rem;font-weight:700;color:#7A5700}
-.banner-ok{background:#EDFAEF;border:2px solid #6BCB77;border-radius:13px;padding:13px;text-align:center;color:#2D7A3A;font-weight:700;font-size:.92rem}
-.banner-ko{background:#FFF0F0;border:2px solid #FF6B6B;border-radius:13px;padding:13px;text-align:center;color:#A83232;font-weight:700;font-size:.92rem}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.46);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
-.modal{background:#fff;border-radius:22px;padding:26px;width:100%;max-width:410px;animation:pop .32s cubic-bezier(.17,.67,.35,1.4)}
-.indice-box{background:linear-gradient(135deg,#FF9F43,#FF6B6B);border-radius:21px;padding:28px;text-align:center;animation:pop .5s cubic-bezier(.17,.67,.35,1.4)}
-.indice-word{font-family:'Fredoka One',cursive;font-size:2.7rem;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.12);letter-spacing:.06em}
-.chip{background:linear-gradient(135deg,#4ECDC4,#45B7D1);color:#fff;padding:4px 12px;border-radius:50px;font-weight:700;font-size:.8rem;display:inline-block;margin:2px}
-@media(max-width:560px){
-  .card{padding:17px;border-radius:16px}
-  .match-grid{grid-template-columns:1fr}
-  .indice-word{font-size:2rem}
-  .btn-lg{font-size:.98rem;padding:12px 26px}
-}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#FEF9F0;min-height:100vh}
+.c{background:#fff;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.08);padding:24px;margin-bottom:14px}
+.hdr{background:#fff;border-bottom:2px solid #F0F0F0;padding:10px 0;position:sticky;top:0;z-index:20}
+.inn{max-width:760px;margin:0 auto;padding:0 18px}
+.ok{background:#EDFAEF;border:2px solid #6BCB77;border-radius:12px;padding:12px;font-weight:700;color:#1A7A27;margin-bottom:10px}
+.ko{background:#FFF0F0;border:2px solid #FF6B6B;border-radius:12px;padding:12px;font-weight:700;color:#9A2020;margin-bottom:10px}
+.scpill{background:linear-gradient(135deg,#FFD93D,#FF9F43);color:#fff;padding:5px 15px;border-radius:50px;font-weight:800;font-size:.9rem}
+input{font-family:inherit;border:2px solid #E8E8E8;border-radius:10px;padding:10px 13px;font-size:.93rem;width:100%;outline:none}
+input:focus{border-color:#4ECDC4;box-shadow:0 0 0 3px rgba(78,205,196,.12)}
+.opt{display:flex;align-items:center;gap:9px;padding:11px 14px;border:2px solid #E8E8E8;border-radius:12px;margin-bottom:8px;cursor:pointer;font-weight:600;font-size:.91rem;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#4ECDC4;background:#F0FFFE}
+.vfr{display:flex;align-items:center;gap:8px;padding:9px 12px;border:2px solid #E8E8E8;border-radius:12px;margin-bottom:7px;flex-wrap:wrap}
+.mi{padding:10px 12px;border:2px solid #E8E8E8;border-radius:11px;cursor:pointer;font-weight:600;font-size:.85rem;min-height:50px;display:flex;align-items:center;margin-bottom:7px;transition:border-color .15s,background .15s}
+.mi:hover{border-color:#C77DFF;background:#F9F0FF}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tag{display:inline-flex;align-items:center;padding:3px 12px;border-radius:50px;font-size:.76rem;font-weight:800}
+.sit{background:linear-gradient(135deg,#E8F7FE,#EDF8F0);border:2px solid #4ECDC4;border-radius:14px;padding:18px}
+.slbl{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#4ECDC4;margin-bottom:2px}
+.sval{font-weight:600;font-size:.92rem;margin-bottom:11px;line-height:1.5}
+.hint{background:#FFF8E1;border:2px dashed #FFD93D;border-radius:11px;padding:10px 13px;font-size:.85rem;font-weight:700;color:#7A5700}
+.rtxt{background:#FFF8EE;border-left:4px solid #FF9F43;padding:14px;border-radius:0 12px 12px 0;font-size:.88rem;line-height:1.75;margin-bottom:14px}
+.ibx{background:#FF9F43;border-radius:18px;padding:24px;text-align:center;margin-bottom:14px}
+.prg{display:flex;align-items:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.48);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.mbox{background:#fff;border-radius:20px;padding:26px;width:100%;max-width:400px}
+@media(max-width:560px){.mg{grid-template-columns:1fr}.inn{padding:0 12px}.c{padding:18px;border-radius:14px}}
+@media print{.noprint{display:none!important}}
 </style>
 </head>
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const {useState,useEffect}=React;
+<div id="app"></div>
 
-/* ═══════════════════════════════════════
-   GAME DATA
-═══════════════════════════════════════ */
-const L1E1=[
+<script>
+/* ═══ DATA ═══ */
+const Q1=[
   {q:'What is a "toy"?',o:['A book to read','An object to play with','A piece of clothing','A food for babies'],c:1},
   {q:'A child falls. What do you do first?',o:['You call a parent right away','You give them some food','You ask them to stand up','You check if they are hurt'],c:3},
   {q:'What is a "nursery"?',o:['A place for young children','A room in a hospital','A class for teenagers','A garden with flowers'],c:0},
   {q:'What does "routine" mean?',o:['A special fun event','A game for children','A regular daily schedule','A creative activity'],c:2},
-  {q:'Which activity is good for children aged 3–5?',o:['Reading a long novel','Painting and drawing','Driving a bicycle alone','Cooking a full meal'],c:1},
+  {q:'Which activity is good for children aged 3-5?',o:['Reading a long novel','Painting and drawing','Driving a bicycle alone','Cooking a full meal'],c:1},
   {q:'What does "assist" mean?',o:['To sing a lullaby','To play with toys','To eat a snack','To help someone'],c:3},
   {q:'How old is a "toddler"?',o:['Between 1 and 3 years old','Between 5 and 7 years old','Between 8 and 10 years old','Between 10 and 12 years old'],c:0},
   {q:'What is "story time"?',o:['Time to eat lunch','Time to have a nap','Time to listen to a story','Time to play outside'],c:2},
-  {q:'A child says: "I want my mummy!" What do you say?',o:['"She is at work now."','"Don\'t worry. She will come soon."','"Please go to your seat."','"You can call her yourself."'],c:1},
+  {q:'A child says: "I want my mummy!" What do you say?',o:['She is at work now.','Don\'t worry. She will come soon.','Please go to your seat.','You can call her yourself.'],c:1},
   {q:'What is a "playground"?',o:['A room for sleeping','A place for cooking','A space for meetings','An outdoor area to play'],c:3}
 ];
-const L1E2=[
+const Q2=[
   {q:'What is a "lullaby"?',o:['A type of outdoor game','A picture made with paint','A song to help a child sleep','A small toy for babies'],c:2},
   {q:'What does "clap" mean?',o:['To hit your hands together','To jump up and down','To shake your head left and right','To stamp your feet on the floor'],c:0},
   {q:'What is "circle time"?',o:['A time to eat a snack','A time to have a nap','A time to do craft','A time to sit and talk in a group'],c:3},
@@ -120,47 +64,42 @@ const L1E2=[
   {q:'What does "kind" mean?',o:['Nice and caring to others','Shy and not very talkative','Fast and very energetic','Loud and sometimes difficult'],c:0},
   {q:'A child is sad. What do you do?',o:['You ignore them','You ask them to be quiet','You call the director','You go to them and listen'],c:3}
 ];
-const T1=`Today is Monday. It is 9 o'clock in the morning. The children arrive at the Sunshine Playroom. There are ten children today. They are aged 3 to 5 years old.
+const T1=`Today is Monday. It is 9 o'clock. The children arrive at the Sunshine Playroom. There are ten children, aged 3 to 5.
 
 The activity leader, Emma, says: "Good morning, everyone!" The children sit in a circle. Emma reads a story about a little bear. The children listen and look at the pictures.
 
-After the story, it is craft time. The children paint. They use red, blue, and yellow paint. Tom paints a sun. Léa paints a flower. Emma helps the children who need help.
+After the story, it is craft time. The children paint with red, blue, and yellow paint. Tom paints a sun. Lea paints a flower. Emma helps the children who need help.
 
 At 12 o'clock, it is lunchtime. The children eat sandwiches and fruit. After lunch, it is nap time. The children rest for 30 minutes.`;
-const L2E1=[
-  {s:"Today is Tuesday.",a:false},
-  {s:"There are ten children at the Sunshine Playroom.",a:true},
-  {s:"The children are aged 3 to 5 years old.",a:true},
-  {s:"Emma reads a story about a little dog.",a:false},
-  {s:"Emma is the activity leader.",a:true},
-  {s:"After the story, the children play football.",a:false},
-  {s:"The children use three colours of paint.",a:true},
-  {s:"Tom paints a flower.",a:false},
-  {s:"Lunchtime is at 12 o'clock.",a:true},
-  {s:"After lunch, the children play outside.",a:false}
+const VF=[
+  {s:"Today is Tuesday.",a:false},{s:"There are ten children.",a:true},
+  {s:"The children are aged 3 to 5.",a:true},{s:"Emma reads a story about a dog.",a:false},
+  {s:"Emma is the activity leader.",a:true},{s:"After the story, children play football.",a:false},
+  {s:"The children use three colours.",a:true},{s:"Tom paints a flower.",a:false},
+  {s:"Lunchtime is at 12 o'clock.",a:true},{s:"After lunch, children play outside.",a:false}
 ];
-const T2=`It is 2 o'clock in the afternoon. The children wake up after their nap. The activity leader, Marc, prepares a music session. He has a guitar, a tambourine, and some maracas.
+const T2=`It is 2 o'clock. The children wake up after their nap. The activity leader, Marc, prepares a music session. He has a guitar, a tambourine, and some maracas.
 
-The children sit in a circle. Marc plays the guitar and the children sing a song about animals: a dog, a cat, and a duck. The children clap their hands and dance.
+The children sit in a circle. Marc plays the guitar. The children sing a song about animals: a dog, a cat, and a duck. They clap their hands and dance.
 
-After the music session, it is snack time. The children eat apples and biscuits. They drink water or orange juice. At 4 o'clock, the children play in the garden. At 5 o'clock, the parents come to collect their children.`;
-const L2E2=[
-  {q:"What time does the afternoon session start?",o:["2 o'clock","1 o'clock","3 o'clock","4 o'clock"],c:0},
+After the session, it is snack time. The children eat apples and biscuits. They drink water or orange juice. At 4 o'clock, the children play in the garden. At 5 o'clock, parents come to collect them.`;
+const Q3=[
+  {q:"What time does the afternoon start?",o:["2 o'clock","1 o'clock","3 o'clock","4 o'clock"],c:0},
   {q:"What is Marc's role?",o:["Director","Activity leader","Cook","Doctor"],c:1},
   {q:"Which instrument does Marc play?",o:["Piano","Drums","Guitar","Flute"],c:2},
   {q:"How many instruments are mentioned?",o:["One","Two","Four","Three"],c:3},
   {q:"What do the children sing about?",o:["Animals","Colors","Food","Sports"],c:0},
   {q:"What do the children do during the song?",o:["Sleep","Clap and dance","Paint","Eat"],c:1},
-  {q:"What do the children eat at snack time?",o:["Sandwiches and juice","Fruit and yogurt","Apples and biscuits","Biscuits and milk"],c:2},
+  {q:"What do children eat at snack time?",o:["Sandwiches and juice","Fruit and yogurt","Apples and biscuits","Biscuits and milk"],c:2},
   {q:"What do the children drink?",o:["Milk or juice","Water or milk","Apple juice or milk","Water or orange juice"],c:3},
-  {q:"What do the children do at 4 o'clock?",o:["Play in the garden","Nap","Eat","Sing"],c:0},
-  {q:"When do the parents arrive?",o:["At 3 o'clock","At 5 o'clock","At 4 o'clock","At 6 o'clock"],c:1}
+  {q:"What do children do at 4 o'clock?",o:["Play in the garden","Nap","Eat","Sing"],c:0},
+  {q:"When do parents arrive?",o:["At 3 o'clock","At 5 o'clock","At 4 o'clock","At 6 o'clock"],c:1}
 ];
-const SITUATIONS=[
-  {emoji:'🎨',title:'Situation Card #1',where:'Sunshine Playroom — Art corner',who:"Leo, 4 years old. He is sad. He doesn't want to paint. He wants to go home.",role:'Activity leader. Talk to Leo. Help him feel better and join the group.',hint:"💡 Think about: his feelings / what you can offer / how you bring him into the activity."},
-  {emoji:'📚',title:'Situation Card #2 — Rattrapage',where:'Sunshine Playroom — Story corner',who:'8 children, aged 3–4. It is story time.',role:'Activity leader. Start the session. Welcome the children. Present the book.',hint:"💡 Think about: how you greet a group / what you say about the activity / how you engage the children."}
+const SIT=[
+  {e:'🎨',t:'Situation Card #1',w:'Sunshine Playroom — Art corner',who:"Leo, 4 years old. He is sad. He doesn't want to paint. He wants to go home.",r:'Activity leader. Talk to Leo. Help him feel better and join the group.',h:'Think about: his feelings / what you can offer / how you bring him into the activity.'},
+  {e:'📚',t:'Situation Card #2 — Rattrapage',w:'Sunshine Playroom — Story corner',who:'8 children, aged 3–4. It is story time.',r:'Activity leader. Start the session. Welcome the children. Present the book.',h:'Think about: how you greet a group / what to say about the activity / how to engage the children.'}
 ];
-const L4E1=[
+const M1=[
   {w:'Schedule',d:'A plan showing what happens and when'},
   {w:'Welcome',d:'To say hello and make someone feel at home'},
   {w:'Safety',d:'Making sure no one is hurt or in danger'},
@@ -172,7 +111,7 @@ const L4E1=[
   {w:'Comfort',d:'To make someone feel better when sad'},
   {w:'Responsible',d:'Taking care of something important'}
 ];
-const L4E2=[
+const M2=[
   {w:'Feeling',d:'An emotion, like happy, sad, or angry'},
   {w:'Behaviour',d:'The way a person acts with others'},
   {w:'Friend',d:'Someone you like and spend time with'},
@@ -184,803 +123,600 @@ const L4E2=[
   {w:'Concentrate',d:'To give all your attention to something'},
   {w:'Achieve',d:'To do something successfully'}
 ];
-const REPORTS=[
-  {emoji:'🩹',title:'Incident Report #1',info:'Play area — Monday 10:30 AM',text:"Tom (5 years old) falls in the play area. He hurts his knee. The activity leader goes to Tom immediately. Tom cries. The activity leader cleans his knee and puts a bandage on it. Tom feels better after 5 minutes. His mother is called at 10:45 AM. She arrives at 11:30 AM. Tom goes home. The incident is recorded.",hint:"💡 Cover: who / what happened / when / actions taken / result."},
-  {emoji:'🧸',title:'Incident Report #2 — Rattrapage',info:'Garden — Monday 2:30 PM',text:"Léa (4) and Nora (4) have an argument. Léa takes Nora's ball. Nora cries. The activity leader comes and speaks calmly to both children. Léa says sorry to Nora. The activity leader gives Nora a new ball. The two children play together again.",hint:"💡 Cover: who / what happened / what the activity leader did / final result."},
-  {emoji:'🎨',title:'Incident Report #3 — 2ᵉ Rattrapage',info:'Classroom — Monday 3:00 PM',text:"During craft time, Sam (3) puts some paint in his mouth. The activity leader sees this. She takes the paint away and checks his mouth. The paint is not dangerous. She contacts Sam's parents. Sam drinks water and continues the activity. The parents are not worried.",hint:"💡 Cover: what happened / immediate action / child's condition / parents informed."}
+const REP=[
+  {e:'🩹',t:'Incident Report #1',i:'Play area | Monday 10:30 AM',x:"Tom (5 years old) falls in the play area. He hurts his knee. The activity leader goes to Tom immediately. Tom cries. The activity leader cleans his knee and puts a bandage on it. Tom feels better after 5 minutes. His mother is called at 10:45. She arrives at 11:30. Tom goes home. The incident is recorded.",h:'Cover: who / what happened / when / actions taken / result.'},
+  {e:'🧸',t:'Incident Report #2 — Rattrapage',i:'Garden | Monday 2:30 PM',x:"Lea (4) and Nora (4) have an argument. Lea takes Nora's ball. Nora cries. The activity leader comes and speaks calmly to both children. Lea says sorry. The activity leader gives Nora a new ball. They play together again.",h:'Cover: who / what happened / what the activity leader did / final result.'},
+  {e:'🎨',t:'Incident Report #3 — 2e Rattrapage',i:'Classroom | Monday 3:00 PM',x:"During craft time, Sam (3) puts paint in his mouth. The activity leader sees this. She takes the paint and checks his mouth. The paint is not dangerous. She contacts Sam's parents. Sam drinks water and continues. The parents are not worried.",h:'Cover: what happened / immediate action / child safe / parents informed.'}
 ];
-const WORDS=['WE','PLAY','AND','LEARN','TOGETHER'];
+const WW=['WE','PLAY','AND','LEARN','TOGETHER'];
 
-/* ═══════════════════════════════════════
-   UTILS
-═══════════════════════════════════════ */
-const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;};
-const passes=(n,t=10)=>n>=t*.8;
-const fmtTime=(s,e)=>{if(!s||!e)return'—';const d=Math.round((e-s)/1e3);return`${0|d/60}min ${d%60}s`;};
+/* ═══ STATE ═══ */
+let S={
+  scr:'home',tc:'0504',sc:'1234',
+  g:{n:'',p:[]},pts:0,sh:[],rv:[],res:{},wr:[],
+  t0:null,t1:null,l2s1:null,l3i:0,l5i:0,np:1
+};
+let E={};// exercise state
+let F={};// form inputs cache
+let showModal=false;
 
-/* ═══════════════════════════════════════
-   ATOMS
-═══════════════════════════════════════ */
-const Btn=({children,color='blue',size='',full,onClick,disabled,style={}})=>(
-  <button className={`btn btn-${color}${size?' btn-'+size:''}${full?' btn-w':''}`} onClick={onClick} disabled={disabled} style={style}>{children}</button>
-);
+const shuf=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;};
+const pass=(n,t=10)=>n>=t*.8;
+const ftm=(s,e)=>{if(!s||!e)return'—';const d=Math.round((e-s)/1e3);return`${0|d/60}min ${d%60}s`;};
 
-function ProgressBar({level}){
-  const lvls=[{n:1,e:'📝',l:'Vocab'},{n:2,e:'📖',l:'Lecture'},{n:3,e:'🎤',l:'Oral'},{n:4,e:'🔗',l:'Match'},{n:5,e:'📋',l:'Rapport'}];
-  return(
-    <div style={{display:'flex',alignItems:'center'}}>
-      {lvls.map((lv,i)=>(
-        <React.Fragment key={lv.n}>
-          {i>0&&<div style={{flex:1,height:3,background:lv.n<=level?'#6BCB77':'#EBEBEB',transition:'background .3s',margin:'0 2px'}}/>}
-          <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:2}}>
-            <div style={{width:32,height:32,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',background:lv.n<level?'#6BCB77':lv.n===level?'#FFD93D':'#EBEBEB',color:lv.n<=level?'#333':'#BBB',fontWeight:800,fontSize:lv.n<level?'.85rem':'1rem',boxShadow:lv.n===level?'0 0 0 3px #FFE98A':'none',transition:'all .3s'}}>{lv.n<level?'✓':lv.e}</div>
-            <span style={{fontSize:'.58rem',fontWeight:700,color:'#AAA'}}>{lv.l}</span>
-          </div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+/* ═══ RENDER ═══ */
+function go(scr,ei={}){E=ei;S.scr=scr;render();}
+function render(){
+  document.getElementById('app').innerHTML=view();
+  document.getElementById('app').scrollTop=0;
+  window.scrollTo(0,0);
 }
 
-function GameHeader({state,level}){
-  return(
-    <div className="header">
-      <div className="container" style={{display:'flex',alignItems:'center',gap:12}}>
-        <div style={{flex:1,minWidth:0}}>
-          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
-            <span className="fredoka" style={{color:'#FF6B6B',fontSize:'.98rem',whiteSpace:'nowrap'}}>☀️ Sunshine Playroom</span>
-            <span style={{color:'#BBB',fontSize:'.78rem',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>• {state.group.name}</span>
-          </div>
-          <ProgressBar level={level}/>
-        </div>
-        <div className="score-pill">⭐ {state.score} pts</div>
-      </div>
-    </div>
-  );
+/* ═══ BUTTONS ═══ */
+const BC={coral:['#FF6B6B','#C83F3F','#fff'],yellow:['#FFD93D','#E0AC00','#333'],teal:['#4ECDC4','#28A098','#fff'],green:['#6BCB77','#3E9948','#fff'],purple:['#C77DFF','#8B40CC','#fff'],orange:['#FF9F43','#CC6C10','#fff'],gray:['#E0E0E0','#CCC','#555']};
+function btn(txt,fn,clr='coral',full=false,sm=false){
+  const[bg,sh,c]=BC[clr]||BC.gray;
+  const w=full?'width:100%;justify-content:center;':'';
+  const sz=sm?'font-size:.8rem;padding:7px 14px;':'font-size:.88rem;padding:9px 20px;';
+  return `<button onclick="${fn}" style="background:${bg};color:${c};box-shadow:0 3px 0 ${sh};${w}${sz}border:none;cursor:pointer;font-weight:800;border-radius:50px;display:inline-flex;align-items:center;gap:6px;font-family:inherit;transition:transform .1s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'">${txt}</button>`;
 }
-
-/* ═══════════════════════════════════════
-   QCM EXERCISE
-═══════════════════════════════════════ */
-function QCMEx({questions,label,onDone}){
-  const L='ABCD',C=['#FF6B6B','#4ECDC4','#FFD93D','#C77DFF'];
-  const [ans,setAns]=useState({});
-  const [done,setDone]=useState(false);
-  const [cur,setCur]=useState(0);
-  const q=questions[cur],all=Object.keys(ans).length===questions.length;
-  const score=questions.filter((_,i)=>ans[i]===questions[i].c).length;
-  function finish(){
-    const wrong=questions.flatMap((q,i)=>ans[i]!==q.c?[{level:label,question:q.q,userAnswer:ans[i]!=null?q.o[ans[i]]:'—',correctAnswer:q.o[q.c]}]:[]);
-    onDone(score,wrong);
-  }
-  return(
-    <div className="fadein">
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:13}}>
-        <span style={{color:'#AAA',fontSize:'.83rem',fontWeight:700}}>Question {cur+1}/{questions.length}</span>
-        <div style={{display:'flex',gap:4}}>
-          {questions.map((_,i)=>(
-            <div key={i} onClick={()=>!done&&setCur(i)} style={{width:8,height:8,borderRadius:'50%',cursor:'pointer',background:ans[i]!=null?(done?ans[i]===questions[i].c?'#6BCB77':'#FF6B6B':'#4ECDC4'):'#DDD'}}/>
-          ))}
+function hdr(lvl){
+  const ls=[['📝','Vocab'],['📖','Lecture'],['🎤','Oral'],['🔗','Match'],['📋','Rapport']];
+  const st=ls.map(([e,l],i)=>
+    `${i>0?`<div style="flex:1;height:3px;background:${i<lvl?'#6BCB77':'#E8E8E8'};margin:0 2px"></div>`:''}
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+      <div style="width:30px;height:30px;border-radius:50%;background:${i+1<lvl?'#6BCB77':i+1===lvl?'#FFD93D':'#E8E8E8'};color:${i+1<=lvl?'#333':'#BBB'};display:flex;align-items:center;justify-content:center;font-size:${i+1<lvl?'.82':'1'}rem;font-weight:800${i+1===lvl?';box-shadow:0 0 0 3px #FFE98A':''}">
+        ${i+1<lvl?'✓':e}</div>
+      <span style="font-size:.58rem;color:#AAA">${l}</span>
+    </div>`).join('');
+  return `<div class="hdr noprint">
+    <div class="inn" style="display:flex;align-items:center;gap:12px">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
+          <span style="color:#FF6B6B;font-weight:800;font-size:.88rem;white-space:nowrap">☀️ Sunshine Playroom</span>
+          <span style="color:#AAA;font-size:.76rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">• ${S.g.n}</span>
         </div>
+        <div class="prg">${st}</div>
       </div>
-      <div style={{background:'#FFF8EE',borderRadius:13,padding:15,marginBottom:15}}>
-        <p style={{fontWeight:700,lineHeight:1.5,fontSize:'.95rem'}}>{q.q}</p>
-      </div>
-      {q.o.map((opt,oi)=>{
-        let cl='qcm-opt';
-        if(ans[cur]===oi)cl+=' sel';
-        if(done&&oi===q.c)cl+=' right';
-        if(done&&ans[cur]===oi&&oi!==q.c)cl+=' wrong';
-        return(
-          <div key={oi} className={cl} onClick={()=>!done&&setAns(p=>({...p,[cur]:oi}))}>
-            <div className="qcm-letter" style={{background:ans[cur]===oi?C[oi]:'#F0F0F0',color:ans[cur]===oi?'#fff':'#999'}}>{L[oi]}</div>
-            <span style={{flex:1}}>{opt}</span>
-            {done&&oi===q.c&&<span style={{color:'#6BCB77',fontWeight:800,marginLeft:4}}>✓</span>}
-            {done&&ans[cur]===oi&&oi!==q.c&&<span style={{color:'#FF6B6B',fontWeight:800,marginLeft:4}}>✗</span>}
-          </div>
-        );
-      })}
-      <div style={{display:'flex',gap:8,marginTop:15,justifyContent:'space-between',alignItems:'center',flexWrap:'wrap'}}>
-        <div style={{display:'flex',gap:7}}>
-          {cur>0&&<Btn color="gray" size="sm" onClick={()=>setCur(c=>c-1)}>← Préc.</Btn>}
-          {cur<questions.length-1&&<Btn color="blue" size="sm" onClick={()=>setCur(c=>c+1)}>Suiv. →</Btn>}
-        </div>
-        {!done&&all&&<Btn color="coral" onClick={()=>setDone(true)}>✅ Valider</Btn>}
-        {done&&(
-          <div style={{display:'flex',gap:10,alignItems:'center',width:'100%',marginTop:8,flexWrap:'wrap'}}>
-            <div className={passes(score)?'banner-ok':'banner-ko'} style={{flex:1}}>{score}/{questions.length} {passes(score)?'✓ Réussi !':'✗ Insuffisant'}</div>
-            <Btn color="green" onClick={finish}>Continuer →</Btn>
-          </div>
-        )}
-      </div>
-      {!done&&<p style={{textAlign:'center',color:'#CCC',fontSize:'.78rem',marginTop:9}}>{Object.keys(ans).length}/{questions.length} répondues</p>}
+      <div class="scpill">⭐ ${S.pts} pts</div>
     </div>
-  );
+  </div>`;
 }
-
-/* ═══════════════════════════════════════
-   V/F EXERCISE
-═══════════════════════════════════════ */
-function VFEx({questions,text,onDone}){
-  const [ans,setAns]=useState({});
-  const [done,setDone]=useState(false);
-  const all=Object.keys(ans).length===questions.length;
-  const score=questions.filter((q,i)=>ans[i]===q.a).length;
-  function finish(){
-    const wrong=questions.flatMap((q,i)=>ans[i]!==q.a?[{level:'Niveau 2 — Vrai/Faux',question:q.s,userAnswer:ans[i]===true?'TRUE':'FALSE',correctAnswer:q.a?'TRUE':'FALSE'}]:[]);
-    onDone(score,wrong);
-  }
-  return(
-    <div className="fadein">
-      <div className="reading-text">
-        <div style={{fontWeight:800,color:'#FF9F43',marginBottom:8,fontStyle:'normal',fontSize:'.88rem'}}>📄 A Day at the Sunshine Playroom</div>
-        {text.split('\n\n').map((p,i)=><p key={i} style={{marginBottom:8}}>{p}</p>)}
-      </div>
-      {questions.map((q,i)=>(
-        <div key={i} className="vf-row" style={{background:done?(ans[i]===q.a?'#EDFAEF':'#FFF0F0'):'#fff',borderColor:done?(ans[i]===q.a?'#6BCB77':'#FF6B6B'):'#EBEBEB'}}>
-          <span style={{width:22,height:22,background:'#FFD93D',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:800,fontSize:'.72rem',flexShrink:0}}>{i+1}</span>
-          <span style={{flex:1,fontWeight:600,fontSize:'.88rem',lineHeight:1.4}}>{q.s}</span>
-          <div style={{display:'flex',gap:5,flexShrink:0}}>
-            <button className={`vf-btn vf-t${ans[i]===true?' on':''}`} onClick={()=>!done&&setAns(p=>({...p,[i]:true}))}>TRUE</button>
-            <button className={`vf-btn vf-f${ans[i]===false?' on':''}`} onClick={()=>!done&&setAns(p=>({...p,[i]:false}))}>FALSE</button>
-          </div>
-          {done&&<span style={{fontSize:'1rem',marginLeft:3}}>{ans[i]===q.a?'✓':'✗'}</span>}
-        </div>
-      ))}
-      <div style={{display:'flex',gap:10,marginTop:15,justifyContent:'flex-end',alignItems:'center',flexWrap:'wrap'}}>
-        {!done&&<Btn color="coral" disabled={!all} onClick={()=>setDone(true)}>✅ Valider</Btn>}
-        {done&&<>
-          <div className={passes(score)?'banner-ok':'banner-ko'} style={{flex:1}}>{score}/{questions.length} {passes(score)?'✓ Réussi !':'✗ Insuffisant'}</div>
-          <Btn color="green" onClick={finish}>Continuer →</Btn>
-        </>}
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   MATCHING EXERCISE
-═══════════════════════════════════════ */
-function MatchEx({pairs,label,onDone}){
-  const [shufl]=useState(()=>shuffle(pairs.map((_,i)=>i)));
-  const [sel,setSel]=useState(null);
-  const [mtch,setMtch]=useState({});
-  const [done,setDone]=useState(false);
-  function clickW(i){if(done||mtch[i]!=null)return;setSel(i===sel?null:i);}
-  function clickD(orig){
-    if(done||Object.values(mtch).includes(orig)||sel==null)return;
-    setMtch(p=>({...p,[sel]:orig}));setSel(null);
-  }
-  const all=Object.keys(mtch).length===pairs.length;
-  const score=pairs.filter((_,i)=>mtch[i]===i).length;
-  function finish(){
-    const wrong=pairs.flatMap((p,i)=>mtch[i]!==i?[{level:label,question:`Match: ${p.w}`,userAnswer:mtch[i]!=null?pairs[mtch[i]]?.d:'—',correctAnswer:p.d}]:[]);
-    onDone(score,wrong);
-  }
-  return(
-    <div className="fadein">
-      <p style={{color:'#AAA',fontSize:'.83rem',marginBottom:13,fontWeight:700}}>① Cliquez un mot → ② Cliquez sa définition</p>
-      <div className="match-grid">
-        <div>
-          <div style={{fontWeight:800,color:'#C77DFF',fontSize:'.72rem',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:7}}>Mots</div>
-          {pairs.map((p,i)=>{
-            const isM=mtch[i]!=null,ok=done&&mtch[i]===i,ko=done&&isM&&mtch[i]!==i;
-            return<div key={i} className={`match-item${sel===i?' selected':''}${isM&&!done?' used':''}${ok?' ok':''}${ko?' ko':''}`} onClick={()=>clickW(i)}>
-              <strong style={{flex:1}}>{p.w}</strong>
-              {isM&&!done&&<span style={{color:'#C77DFF',fontSize:'.7rem',marginLeft:4}}>✓</span>}
-              {ok&&<span style={{color:'#6BCB77',marginLeft:4}}>✓</span>}{ko&&<span style={{color:'#FF6B6B',marginLeft:4}}>✗</span>}
-            </div>;
-          })}
-        </div>
-        <div>
-          <div style={{fontWeight:800,color:'#FF9F43',fontSize:'.72rem',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:7}}>Définitions</div>
-          {shufl.map(orig=>{
-            const isU=Object.values(mtch).includes(orig);
-            const wKey=Object.keys(mtch).find(k=>Number(k)===orig&&mtch[k]===orig);
-            const matchKey=Object.keys(mtch).find(k=>mtch[k]===orig);
-            const ok=done&&matchKey!=null&&Number(matchKey)===orig;
-            const ko=done&&isU&&!ok;
-            return<div key={orig} className={`match-item${isU&&!done?' used':''}${ok?' ok':''}${ko?' ko':''}`} onClick={()=>clickD(orig)}>{pairs[orig].d}</div>;
-          })}
-        </div>
-      </div>
-      <div style={{marginTop:15,display:'flex',gap:10,justifyContent:'flex-end',flexWrap:'wrap',alignItems:'center'}}>
-        {!done&&all&&<Btn color="coral" onClick={()=>setDone(true)}>✅ Valider</Btn>}
-        {done&&<>
-          <div className={passes(score)?'banner-ok':'banner-ko'} style={{flex:1}}>{score}/{pairs.length} {passes(score)?'✓ Réussi !':'✗ Insuffisant'}</div>
-          <Btn color="green" onClick={finish}>Continuer →</Btn>
-        </>}
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   TEACHER VALIDATION MODAL
-═══════════════════════════════════════ */
-function TeacherModal({tCode,onResult}){
-  const [step,setStep]=useState('code');
-  const [code,setCode]=useState('');
-  const [err,setErr]=useState('');
-  function check(){code===tCode?(setStep('val'),setErr('')):(setErr('Code incorrect'),setCode(''));}
-  return(
-    <div className="modal-bg">
-      <div className="modal">
-        {step==='code'?<>
-          <div style={{textAlign:'center',marginBottom:18}}>
-            <div style={{fontSize:'2.4rem'}}>👩‍🏫</div>
-            <h3 className="fredoka" style={{color:'#4ECDC4',marginTop:4}}>Validation Professeur</h3>
-            <p style={{color:'#AAA',fontSize:'.83rem',marginTop:4}}>Entrez votre code pour valider l'oral</p>
-          </div>
-          <input type="password" placeholder="Code professeur" value={code} onChange={e=>setCode(e.target.value)} onKeyDown={e=>e.key==='Enter'&&check()} style={{marginBottom:9}}/>
-          {err&&<p style={{color:'#FF6B6B',fontWeight:700,marginBottom:8,fontSize:'.88rem'}}>{err}</p>}
-          <Btn color="blue" full onClick={check}>Valider le code →</Btn>
-        </>:<>
-          <div style={{textAlign:'center',marginBottom:20}}>
-            <div style={{fontSize:'2.4rem'}}>🎤</div>
-            <h3 className="fredoka" style={{color:'#FF9F43',marginTop:4}}>Résultat de l'oral</h3>
-            <p style={{color:'#AAA',fontSize:'.83rem',marginTop:4}}>L'élève a-t-il réussi ?</p>
-          </div>
-          <div style={{display:'flex',gap:12}}>
-            <Btn color="green" full onClick={()=>onResult(true)}>✅ Réussi</Btn>
-            <Btn color="coral" full onClick={()=>onResult(false)}>❌ À refaire</Btn>
-          </div>
-        </>}
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   INDICE REVEAL
-═══════════════════════════════════════ */
-function IndiceReveal({indice,collected,onNext}){
-  return(
-    <div className="container fadein" style={{paddingTop:32}}>
-      <div style={{textAlign:'center',marginBottom:20}}>
-        <div style={{fontSize:'2.6rem',animation:'float 2s ease-in-out infinite'}}>🔓</div>
-        <h2 className="fredoka" style={{color:'#FF9F43',fontSize:'1.75rem',marginTop:7}}>Fragment découvert !</h2>
-        <p style={{color:'#AAA',marginTop:4,fontSize:'.9rem'}}>Notez ce mot sur votre feuille ! 📝</p>
-      </div>
-      <div className="indice-box" style={{marginBottom:20}}>
-        <div style={{color:'rgba(255,255,255,.75)',fontSize:'.78rem',fontWeight:800,letterSpacing:'.1em',marginBottom:7,textTransform:'uppercase'}}>Mot secret</div>
-        <div className="indice-word">{indice}</div>
-        <div style={{color:'rgba(255,255,255,.7)',marginTop:11,fontSize:'.85rem'}}>⚠️ Les 5 mots formeront une phrase !</div>
-      </div>
-      <div className="card" style={{marginBottom:20}}>
-        <h4 className="fredoka" style={{color:'#FF9F43',marginBottom:11}}>🧩 Fragments collectés ({collected.length}/5)</h4>
-        <div style={{display:'flex',gap:7,flexWrap:'wrap'}}>
-          {collected.map((w,i)=><div key={i} style={{background:'linear-gradient(135deg,#FFD93D,#FF9F43)',color:'#fff',padding:'6px 17px',borderRadius:50,fontFamily:'Fredoka One',fontSize:'1.1rem'}}>{w}</div>)}
-          {Array.from({length:5-collected.length}).map((_,i)=><div key={i} style={{background:'#EEE',color:'#CCC',padding:'6px 17px',borderRadius:50,fontWeight:800,fontSize:'1.05rem'}}>?</div>)}
-        </div>
-      </div>
-      <div style={{textAlign:'center'}}><Btn color="yellow" size="lg" onClick={onNext}>Niveau suivant →</Btn></div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   LEVEL INTRO
-═══════════════════════════════════════ */
-function LvlIntro({emoji,title,sub,desc,color,onStart}){
-  return(
-    <div className="container fadein" style={{paddingTop:30}}>
-      <div className="card">
-        <div style={{textAlign:'center',marginBottom:20}}>
-          <div style={{fontSize:'3.2rem'}}>{emoji}</div>
-          <h2 className="fredoka" style={{color,fontSize:'1.8rem',marginTop:6}}>{title}</h2>
-          <p style={{color:'#FF9F43',fontWeight:700,marginTop:4,fontSize:'.92rem'}}>{sub}</p>
-        </div>
-        <div style={{background:'#FFF8EE',borderRadius:13,padding:17,marginBottom:20}}>{desc}</div>
-        <div style={{textAlign:'center'}}><Btn color="coral" size="lg" onClick={onStart}>C'est parti ! 🎯</Btn></div>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   ORAL CARD (levels 3 & 5)
-═══════════════════════════════════════ */
-function OralCard({content,tCode,onResult}){
-  const [ready,setReady]=useState(false);
-  const [showModal,setShowModal]=useState(false);
-  return(
-    <div className="container fadein" style={{paddingTop:22}}>
-      <div className="card">
-        <div style={{textAlign:'center',marginBottom:16}}>
-          <div style={{fontSize:'2.1rem'}}>{content.emoji}</div>
-          <h3 className="fredoka" style={{color:'#FF9F43',fontSize:'1.35rem',marginTop:4}}>{content.title}</h3>
-          {content.info&&<p style={{color:'#AAA',fontSize:'.83rem',marginTop:3}}>{content.info}</p>}
-        </div>
-        <div className="sit-card">
-          {content.where&&<><div className="sit-lbl">📍 Où</div><div className="sit-val">{content.where}</div></>}
-          {content.who&&<><div className="sit-lbl">👤 Qui</div><div className="sit-val">{content.who}</div></>}
-          <div className="sit-lbl">{content.text?'📋 Rapport':'🎭 Ton rôle'}</div>
-          <div className="sit-val" style={{fontStyle:content.text?'normal':'normal'}}>{content.text||content.role}</div>
-          {content.role&&content.text&&<><div className="sit-lbl">💼 Ta mission</div><div className="sit-val">{content.role||''}</div></>}
-        </div>
-        <div className="hint" style={{marginTop:14,marginBottom:16}}>{content.hint}</div>
-        {!ready?(
-          <div style={{textAlign:'center'}}>
-            <p style={{color:'#AAA',marginBottom:11,fontSize:'.88rem'}}>Lisez la carte, préparez-vous mentalement.</p>
-            <Btn color="coral" size="lg" onClick={()=>setReady(true)}>🎤 Je commence</Btn>
-          </div>
-        ):(
-          <div style={{textAlign:'center',background:'#F0FFFE',padding:18,borderRadius:15}}>
-            <p style={{fontWeight:700,color:'#4ECDC4',marginBottom:14,fontSize:'.93rem'}}>L'élève présente son oral en anglais…</p>
-            <Btn color="purple" size="lg" onClick={()=>setShowModal(true)}>👩‍🏫 Validation Professeur</Btn>
-          </div>
-        )}
-      </div>
-      {showModal&&<TeacherModal tCode={tCode} onResult={ok=>{setShowModal(false);onResult(ok);}}/>}
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   HOME SCREEN
-═══════════════════════════════════════ */
-function HomeScreen({setState}){
-  return(
-    <div style={{minHeight:'100vh',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
-      <div className="blob-bg"><div className="blob b1"/><div className="blob b2"/><div className="blob b3"/></div>
-      <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
-        <div style={{textAlign:'center',maxWidth:580}}>
-          <div style={{fontSize:'4.5rem',animation:'float 3s ease-in-out infinite'}}>🌟</div>
-          <h1 className="fredoka" style={{fontSize:'2.6rem',color:'#FF6B6B',textShadow:'0 3px 0 rgba(255,107,107,.18)',marginTop:8,marginBottom:6}}>Save the Sunshine Playroom</h1>
-          <p style={{color:'#FF9F43',fontWeight:700,fontSize:'1.05rem',marginBottom:6}}>🎮 English Escape Game — Bac Pro AEPA</p>
-          <p style={{color:'#AAA',marginBottom:36,fontSize:'.92rem'}}>Animateurs en herbe, votre mission commence maintenant !</p>
-          <div style={{display:'flex',gap:18,justifyContent:'center',flexWrap:'wrap'}}>
-            {[{emoji:'👨‍🎓',label:'Élèves',sub:'Rejoindre la mission',color:'blue',btn:'C\'est parti ! 🚀',screen:'student-login'},
-              {emoji:'👩‍🏫',label:'Professeur',sub:'Gérer le jeu',color:'purple',btn:'Accès prof 🔑',screen:'teacher-login'}
-            ].map(x=>(
-              <div key={x.screen} style={{background:'#fff',borderRadius:22,padding:28,boxShadow:'0 8px 28px rgba(0,0,0,.07)',flex:1,minWidth:190,maxWidth:260}}>
-                <div style={{fontSize:'2.6rem',marginBottom:10}}>{x.emoji}</div>
-                <h3 className="fredoka" style={{color:x.color==='blue'?'#4ECDC4':'#C77DFF',marginBottom:6}}>{x.label}</h3>
-                <p style={{color:'#AAA',fontSize:'.85rem',marginBottom:18}}>{x.sub}</p>
-                <Btn color={x.color} full onClick={()=>setState(s=>({...s,screen:x.screen}))}>{x.btn}</Btn>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <footer style={{textAlign:'center',padding:'18px 20px',color:'#BBB',fontSize:'.82rem',background:'rgba(255,255,255,.6)',backdropFilter:'blur(10px)'}}>
-        Créé par <strong style={{color:'#FF9F43'}}>C. iemfre</strong>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="#" onClick={e=>{e.preventDefault();setState(s=>({...s,screen:'rgpd'}));}} style={{color:'#4ECDC4',textDecoration:'none',fontWeight:700}}>🔒 RGPD</a>
-      </footer>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   LOGIN SCREEN
-═══════════════════════════════════════ */
-function LoginScreen({title,emoji,expectedCode,onSuccess,onBack}){
-  const [code,setCode]=useState(''),[ err,setErr]=useState('');
-  function check(){code===expectedCode?onSuccess():(setErr('Code incorrect. Réessayez.'),setCode(''));}
-  return(
-    <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
-      <div className="blob-bg"><div className="blob b1"/><div className="blob b2"/><div className="blob b3"/></div>
-      <div className="card fadein" style={{maxWidth:390,width:'100%'}}>
-        <button onClick={onBack} style={{background:'none',border:'none',cursor:'pointer',color:'#AAA',fontWeight:700,marginBottom:14,fontSize:'.9rem'}}>← Retour</button>
-        <div style={{textAlign:'center',marginBottom:22}}>
-          <div style={{fontSize:'2.8rem'}}>{emoji}</div>
-          <h2 className="fredoka" style={{color:'#4ECDC4',fontSize:'1.75rem',marginTop:6}}>{title}</h2>
-        </div>
-        <input type="password" placeholder="Entrez le code d'accès" value={code} onChange={e=>setCode(e.target.value)} onKeyDown={e=>e.key==='Enter'&&check()} style={{marginBottom:10}}/>
-        {err&&<p style={{color:'#FF6B6B',fontWeight:700,marginBottom:9,fontSize:'.88rem'}}>{err}</p>}
-        <Btn color="blue" full onClick={check}>Accéder →</Btn>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   TEACHER DASHBOARD
-═══════════════════════════════════════ */
-function TeacherDashboard({state,setState}){
-  const [newCode,setNewCode]=useState(state.studentCode);
-  const [saved,setSaved]=useState(false);
-  function save(){setState(s=>({...s,studentCode:newCode}));setSaved(true);setTimeout(()=>setSaved(false),2200);}
-  return(
-    <div style={{minHeight:'100vh',paddingBottom:40}}>
-      <div className="blob-bg"><div className="blob b1"/><div className="blob b2"/><div className="blob b3"/></div>
-      <div className="container">
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:22,paddingTop:16}}>
-          <h1 className="fredoka" style={{color:'#C77DFF',fontSize:'1.9rem'}}>👩‍🏫 Interface Professeur</h1>
-          <Btn color="gray" size="sm" onClick={()=>setState(s=>({...s,screen:'home'}))}>← Accueil</Btn>
-        </div>
-        <div style={{display:'grid',gap:18}}>
-          <div className="card">
-            <h3 className="fredoka" style={{color:'#4ECDC4',marginBottom:14}}>🔑 Code d'accès élèves</h3>
-            <p style={{color:'#888',marginBottom:11,fontSize:'.9rem'}}>Code actuel : <strong style={{color:'#4ECDC4',fontFamily:'monospace',fontSize:'1.25rem'}}>{state.studentCode}</strong></p>
-            <div style={{display:'flex',gap:10}}>
-              <input type="text" value={newCode} onChange={e=>setNewCode(e.target.value)} placeholder="Nouveau code" style={{flex:1}}/>
-              <Btn color="blue" onClick={save}>Enregistrer</Btn>
-            </div>
-            {saved&&<p style={{color:'#6BCB77',fontWeight:700,marginTop:8,fontSize:'.9rem'}}>✓ Code mis à jour !</p>}
-          </div>
-          <div className="card">
-            <h3 className="fredoka" style={{color:'#FF9F43',marginBottom:14}}>📋 Infos du jeu</h3>
-            {[
-              ['Code maître final','WE PLAY AND LEARN TOGETHER (les indices sont donnés dans le désordre)'],
-              ['Points','+ 50 pts par exercice réussi (≥ 80%) • − 25 pts si échec Niveau 2'],
-              ['Niveau 2','Les DEUX exercices sont obligatoires. 80% requis sur chacun pour avancer.'],
-              ['Niveaux oraux (3 & 5)','Validation manuelle avec votre code professeur.']
-            ].map(([k,v])=>(
-              <div key={k} style={{background:'#FFF8EE',padding:'11px 14px',borderRadius:11,marginBottom:9}}>
-                <strong style={{color:'#FF9F43'}}>{k} :</strong> <span style={{color:'#555',fontSize:'.88rem'}}>{v}</span>
-              </div>
-            ))}
-          </div>
-          <div className="card">
-            <h3 className="fredoka" style={{color:'#6BCB77',marginBottom:14}}>🎓 Critères d'évaluation orale</h3>
-            {[
-              ['Niveau 3 — Situation orale','Communication en anglais simple, vocabulaire petite enfance, attitude bienveillante.'],
-              ['Niveau 5 — Compte rendu','Structure who/what/when/action/result, phrases simples et correctes.']
-            ].map(([k,v])=>(
-              <div key={k} style={{background:'#EDFAEF',padding:'11px 14px',borderRadius:11,border:'1px solid #B8EDBD',marginBottom:9}}>
-                <strong style={{color:'#2D7A3A'}}>{k} :</strong> <span style={{color:'#555',fontSize:'.88rem'}}>{v}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   GROUP SETUP
-═══════════════════════════════════════ */
-function GroupSetup({onStart}){
-  const [name,setName]=useState('');
-  const [parts,setParts]=useState([{fn:'',ln:''}]);
-  const [err,setErr]=useState('');
-  function addP(){if(parts.length<4)setParts(p=>[...p,{fn:'',ln:''}]);}
-  function remP(i){setParts(p=>p.filter((_,j)=>j!==i));}
-  function upP(i,f,v){const c=v.replace(/[^a-zA-Z]/g,'').toUpperCase().slice(0,2);setParts(p=>p.map((x,j)=>j===i?{...x,[f]:c}:x));}
-  function go(){
-    if(!name.trim()){setErr('Entrez le nom du groupe');return;}
-    if(parts.some(p=>!p.fn||!p.ln)){setErr('Remplissez tous les champs participants');return;}
-    setErr('');onStart(name.trim(),parts);
-  }
-  return(
-    <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
-      <div className="blob-bg"><div className="blob b1"/><div className="blob b2"/><div className="blob b3"/></div>
-      <div className="card fadein" style={{maxWidth:540,width:'100%'}}>
-        <div style={{textAlign:'center',marginBottom:22}}>
-          <div style={{fontSize:'2.8rem'}}>👥</div>
-          <h2 className="fredoka" style={{color:'#FF6B6B',fontSize:'1.75rem',marginTop:6}}>Présentation du groupe</h2>
-          <p style={{color:'#AAA',marginTop:4,fontSize:'.88rem'}}>Identifiez-vous avant de commencer la mission</p>
-        </div>
-        <div style={{marginBottom:18}}>
-          <label style={{fontWeight:700,display:'block',marginBottom:6,color:'#444',fontSize:'.9rem'}}>🏷️ Nom du groupe</label>
-          <input type="text" placeholder="Ex : Les Super Animateurs" value={name} onChange={e=>setName(e.target.value)}/>
-        </div>
-        <div style={{marginBottom:18}}>
-          <label style={{fontWeight:700,display:'block',marginBottom:6,color:'#444',fontSize:'.9rem'}}>👤 Participants ({parts.length}/4)</label>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr auto',gap:8,marginBottom:8,background:'#F8F8F8',padding:'9px 10px',borderRadius:10}}>
-            {['2 lettres prénom','2 lettres nom','ID',''].map((h,i)=><div key={i} style={{fontSize:'.72rem',fontWeight:800,color:'#AAA',textAlign:'center'}}>{h}</div>)}
-          </div>
-          {parts.map((p,i)=>(
-            <div key={i} style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr auto',gap:8,marginBottom:8,alignItems:'center'}}>
-              <input type="text" placeholder="CA" value={p.fn} onChange={e=>upP(i,'fn',e.target.value)} style={{textAlign:'center',fontWeight:800,letterSpacing:'.1em',fontFamily:'monospace'}}/>
-              <input type="text" placeholder="IE" value={p.ln} onChange={e=>upP(i,'ln',e.target.value)} style={{textAlign:'center',fontWeight:800,letterSpacing:'.1em',fontFamily:'monospace'}}/>
-              <div style={{textAlign:'center'}}>{p.fn&&p.ln?<span className="chip">{p.fn}-{p.ln}</span>:<span style={{color:'#DDD',fontWeight:800}}>--</span>}</div>
-              <button onClick={()=>remP(i)} disabled={parts.length<=1} style={{width:30,height:30,border:'none',background:parts.length>1?'#FF6B6B':'#EEE',color:parts.length>1?'#fff':'#CCC',borderRadius:'50%',cursor:parts.length>1?'pointer':'not-allowed',fontWeight:800,fontSize:'1rem'}}>×</button>
-            </div>
-          ))}
-          {parts.length<4&&<Btn color="gray" size="sm" onClick={addP} style={{marginTop:4}}>+ Ajouter</Btn>}
-        </div>
-        {err&&<div className="banner-ko" style={{marginBottom:14}}>{err}</div>}
-        <Btn color="coral" size="lg" full onClick={go}>🚀 Lancer la mission !</Btn>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   FINAL CODE SCREEN
-═══════════════════════════════════════ */
-function FinalCode({collected,onSuccess}){
-  const [code,setCode]=useState('');
-  const [err,setErr]=useState('');
-  const [tries,setTries]=useState(0);
-  function check(){
-    if(code.trim().toUpperCase().replace(/\s+/g,' ')==='WE PLAY AND LEARN TOGETHER'){onSuccess();}
-    else{setTries(t=>t+1);setErr(`❌ Code incorrect. Réarrangez vos ${collected.length} fragments ! (Tentative ${tries+1})`)}
-  }
-  return(
-    <div className="container fadein" style={{paddingTop:36}}>
-      <div className="card">
-        <div style={{textAlign:'center',marginBottom:22}}>
-          <div style={{fontSize:'3.5rem'}}>🔐</div>
-          <h2 className="fredoka" style={{color:'#FF6B6B',fontSize:'1.85rem',marginTop:7}}>Code Final</h2>
-          <p style={{color:'#AAA',marginTop:4,fontSize:'.9rem'}}>Arrangez vos 5 fragments pour former la phrase secrète</p>
-        </div>
-        <div style={{background:'#FFF8EE',borderRadius:14,padding:18,marginBottom:20}}>
-          <h4 className="fredoka" style={{color:'#FF9F43',marginBottom:11}}>🧩 Vos fragments collectés :</h4>
-          <div style={{display:'flex',gap:7,flexWrap:'wrap'}}>
-            {collected.map((w,i)=><div key={i} style={{background:'linear-gradient(135deg,#FFD93D,#FF9F43)',color:'#fff',padding:'7px 18px',borderRadius:50,fontFamily:'Fredoka One',fontSize:'1.15rem'}}>{w}</div>)}
-          </div>
-          <p style={{color:'#AAA',fontSize:'.8rem',marginTop:11}}>⚠️ Les fragments sont dans le désordre — trouvez la bonne phrase !</p>
-        </div>
-        <label style={{fontWeight:700,display:'block',marginBottom:8,color:'#444',fontSize:'.9rem'}}>✍️ Entrez la phrase complète :</label>
-        <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" value={code} onChange={e=>setCode(e.target.value)} onKeyDown={e=>e.key==='Enter'&&check()} style={{fontSize:'1.05rem',textAlign:'center',letterSpacing:'.04em',marginBottom:10}}/>
-        {err&&<div className="banner-ko" style={{marginBottom:14}}>{err}</div>}
-        <div style={{textAlign:'center'}}><Btn color="coral" size="lg" onClick={check}>🔓 Ouvrir le Sunshine Playroom !</Btn></div>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   VICTORY SCREEN
-═══════════════════════════════════════ */
-function VictoryScreen({state,onReport}){
-  const [show,setShow]=useState(false);
-  useEffect(()=>{setTimeout(()=>setShow(true),400);},[]);
-  return(
-    <div className="container fadein" style={{paddingTop:32,paddingBottom:40}}>
-      <div style={{background:'linear-gradient(135deg,#FFD93D,#FF6B6B,#4ECDC4)',borderRadius:22,padding:36,textAlign:'center',color:'#fff',marginBottom:22}}>
-        <div style={{fontSize:'3rem',marginBottom:8}}>{show?'🎉🌟🎊🏆🎈':'⏳'}</div>
-        <h1 className="fredoka" style={{fontSize:'2.3rem',marginBottom:7}}>Mission accomplie !</h1>
-        <p style={{fontSize:'1.1rem',opacity:.9,marginBottom:4}}>Le Sunshine Playroom est sauvé ! 🌈</p>
-        <div style={{fontFamily:'Fredoka One',fontSize:'1.35rem',marginTop:14,background:'rgba(255,255,255,.2)',padding:'10px 22px',borderRadius:50,display:'inline-block'}}>WE PLAY AND LEARN TOGETHER ✓</div>
-      </div>
-      <div className="card">
-        <h3 className="fredoka" style={{color:'#FF9F43',marginBottom:14}}>📊 Résumé de mission</h3>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:11,marginBottom:16}}>
-          <div style={{background:'#FFF8EE',padding:14,borderRadius:13,textAlign:'center'}}>
-            <div className="fredoka" style={{fontSize:'2.3rem',color:'#FF6B6B'}}>{state.score}</div>
-            <div style={{color:'#AAA',fontWeight:700,fontSize:'.85rem'}}>Points gagnés</div>
-          </div>
-          <div style={{background:'#FFF8EE',padding:14,borderRadius:13,textAlign:'center'}}>
-            <div className="fredoka" style={{fontSize:'1.65rem',color:'#4ECDC4'}}>{fmtTime(state.startTime,state.endTime)}</div>
-            <div style={{color:'#AAA',fontWeight:700,fontSize:'.85rem'}}>Durée</div>
-          </div>
-        </div>
-        <div style={{marginBottom:16}}>
-          <div style={{fontWeight:700,marginBottom:7,fontSize:'.9rem'}}>👥 Groupe : <span style={{color:'#FF6B6B'}}>{state.group.name}</span></div>
-          <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>{state.group.participants.map((p,i)=><span key={i} className="chip">{p.fn}-{p.ln}</span>)}</div>
-        </div>
-        <Btn color="coral" size="lg" full onClick={onReport}>📥 Télécharger le rapport PDF</Btn>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   RGPD SCREEN
-═══════════════════════════════════════ */
-function RGPDScreen({onBack}){
-  return(
-    <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
-      <div className="blob-bg"><div className="blob b1"/><div className="blob b2"/><div className="blob b3"/></div>
-      <div className="card fadein" style={{maxWidth:560,width:'100%'}}>
-        <button onClick={onBack} style={{background:'none',border:'none',cursor:'pointer',color:'#AAA',fontWeight:700,marginBottom:14,fontSize:'.9rem'}}>← Retour</button>
-        <div style={{textAlign:'center',marginBottom:20}}>
-          <div style={{fontSize:'2.6rem'}}>🔒</div>
-          <h2 className="fredoka" style={{color:'#4ECDC4',marginTop:5}}>Politique RGPD</h2>
-        </div>
-        <div style={{background:'#FFF8EE',borderRadius:14,padding:18,color:'#777',lineHeight:1.85,fontSize:'.9rem'}}>
-          <p style={{fontWeight:700,color:'#444',marginBottom:11}}>Cette page sera complétée ultérieurement.</p>
-          <p>Les données saisies dans cette application (nom de groupe, identifiants participants) ne sont pas transmises à des serveurs tiers et restent uniquement en mémoire durant la session.</p>
-          <p style={{marginTop:10}}>Aucune donnée n'est conservée après fermeture de la page.</p>
-          <p style={{marginTop:10}}>Pour toute question, contactez l'auteur de l'application.</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   REPORT GENERATOR
-═══════════════════════════════════════ */
-function generateReport(state){
-  const now=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  const dur=fmtTime(state.startTime,state.endTime);
-  const lNames={'Niveau 1 — Ex 1':'📝 Vocabulaire Ex.1','Niveau 1 — Ex 2':'📝 Vocabulaire (Rattrapage)','Niveau 2 — Vrai/Faux':'📖 Lecture Vrai/Faux','Niveau 2 — QCM':'📖 Lecture QCM','Niveau 3 — Oral':'🎤 Expression orale','Niveau 4 — Ex 1':'🔗 Correspondance Ex.1','Niveau 4 — Ex 2':'🔗 Correspondance (Rattrapage)','Niveau 5 — Oral':'📋 Compte rendu oral'};
-  const wrong=state.wrongs||[];
-  const byLvl={};wrong.forEach(w=>{const k=w.level||'Autre';if(!byLvl[k])byLvl[k]=[];byLvl[k].push(w);});
-  const html=`<!DOCTYPE html><html lang="fr"><head>
-<meta charset="UTF-8"><title>Rapport – ${state.group.name}</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:#fff;padding:28px;color:#333;font-size:14px}
-.header{background:linear-gradient(135deg,#FF6B6B,#FFD93D,#4ECDC4);padding:30px;border-radius:18px;color:#fff;text-align:center;margin-bottom:22px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
-.ttl{font-family:'Fredoka One',cursive;font-size:1.9rem;margin-bottom:4px}
-.sec{background:#f9f9f9;border-radius:14px;padding:18px;margin-bottom:18px;border-left:5px solid #4ECDC4}
-.sec h3{font-family:'Fredoka One',cursive;color:#4ECDC4;margin-bottom:11px;font-size:1.1rem}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.stat{background:#fff;border-radius:11px;padding:14px;text-align:center;border:2px solid #F0F0F0}
-.sn{font-family:'Fredoka One',cursive;font-size:1.85rem;color:#FF6B6B}
-.sl{color:#AAA;font-size:.8rem;font-weight:700;margin-top:3px}
-.chip{background:linear-gradient(135deg,#4ECDC4,#45B7D1);color:#fff;padding:3px 11px;border-radius:50px;font-weight:700;font-size:.78rem;display:inline-block;margin:2px}
-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
-th{background:#FF9F43;color:#fff;padding:9px;text-align:left;font-weight:800;font-size:.82rem}
-td{padding:9px;border-bottom:1px solid #F0F0F0;vertical-align:top}
-tr:nth-child(even) td{background:#FFF8EE}
-.pass{background:#6BCB77;color:#fff;padding:2px 9px;border-radius:50px;font-size:.75rem;font-weight:800}
-.fail{background:#FF6B6B;color:#fff;padding:2px 9px;border-radius:50px;font-size:.75rem;font-weight:800}
-.err-item{background:#fff;padding:11px;border-radius:9px;margin-bottom:8px;border:1px solid #FFE0E0}
-.err-q{color:#444;font-weight:700;margin-bottom:4px;font-size:.88rem}
-.err-u{color:#FF6B6B;font-size:.82rem}
-.err-c{color:#6BCB77;font-size:.82rem}
-.code{background:linear-gradient(135deg,#FFD93D,#FF9F43);color:#fff;padding:14px 22px;border-radius:14px;text-align:center;font-family:'Fredoka One',cursive;font-size:1.4rem;margin-top:14px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
-.foot{text-align:center;color:#CCC;font-size:.75rem;margin-top:22px;padding-top:14px;border-top:1px solid #EEE}
-@media print{body{padding:0}.header{border-radius:0}}
-</style></head><body>
-<div class="header">
-  <div class="ttl">🌟 Save the Sunshine Playroom</div>
-  <div style="opacity:.9;font-size:.95rem">English Escape Game — Bac Pro AEPA • Rapport de mission</div>
-  <div style="opacity:.75;font-size:.82rem;margin-top:6px">${now}</div>
-</div>
-<div class="sec">
-  <h3>👥 Groupe</h3>
-  <div class="grid2">
-    <div class="stat"><div style="font-weight:800;font-size:1.1rem;color:#333">${state.group.name}</div><div class="sl">Nom du groupe</div></div>
-    <div class="stat"><div class="sn">${state.group.participants.length}</div><div class="sl">Participant(s)</div></div>
+function wrap(h,lvl){return hdr(lvl)+`<div class="inn" style="padding-top:16px;padding-bottom:30px">${h}</div>`;}
+function indice(idx){
+  const w=WW[S.sh[idx]];
+  if(!S.rv.includes(w))S.rv.push(w);
+  const chips=S.rv.map(x=>`<span style="background:#FF9F43;color:#fff;padding:6px 15px;border-radius:50px;font-weight:800;display:inline-block;margin:3px">${x}</span>`).join('');
+  const empty=Array.from({length:5-S.rv.length}).map(()=>'<span style="background:#E8E8E8;color:#BBB;padding:6px 15px;border-radius:50px;font-weight:800;display:inline-block;margin:3px">?</span>').join('');
+  return `<div class="ibx">
+    <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.8);margin-bottom:5px">Mot secret</div>
+    <div style="font-size:2.5rem;font-weight:800;color:#fff;letter-spacing:.06em">${w}</div>
+    <div style="color:rgba(255,255,255,.75);font-size:.82rem;margin-top:7px">📝 Notez ce mot sur votre feuille !</div>
   </div>
-  <div>${state.group.participants.map(p=>`<span class="chip">${p.fn}-${p.ln}</span>`).join('')}</div>
-</div>
-<div class="sec">
-  <h3>📊 Score global</h3>
-  <div class="grid2">
-    <div class="stat"><div class="sn" style="color:#FF6B6B">${state.score}</div><div class="sl">Points gagnés</div></div>
-    <div class="stat"><div class="sn" style="color:#4ECDC4;font-size:1.5rem">${dur}</div><div class="sl">Durée totale</div></div>
+  <div class="c">
+    <div style="font-weight:800;color:#FF9F43;margin-bottom:9px">🧩 Fragments collectés (${S.rv.length}/5)</div>
+    <div>${chips}${empty}</div>
+    <p style="color:#888;font-size:.78rem;margin-top:9px">Les 5 mots forment une phrase !</p>
+  </div>`;
+}
+function lvlIntro(e,t,s,desc,fn){
+  return `<div class="c">
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-size:2.8rem">${e}</div>
+      <h2 style="font-size:1.6rem;font-weight:800;color:#FF6B6B;margin-top:5px">${t}</h2>
+      <p style="color:#FF9F43;font-weight:700;font-size:.88rem;margin-top:4px">${s}</p>
+    </div>
+    <div style="background:#FFF8EE;border-radius:11px;padding:14px;margin-bottom:18px">${desc}</div>
+    <div style="text-align:center">${btn("C'est parti ! 🎯",fn,'coral')}</div>
+  </div>`;
+}
+
+/* ═══ SCREEN BUILDER ═══ */
+function view(){
+  const sc=S.scr;
+  if(sc==='home')return vHome();
+  if(sc==='rgpd')return vRGPD();
+  if(sc==='tlg')return vLogin('👩‍🏫 Interface Professeur','tdb');
+  if(sc==='tdb')return vTeacher();
+  if(sc==='slg')return vLogin('👨‍🎓 Connexion Élèves','grp');
+  if(sc==='grp')return vGroup();
+  if(sc==='l1i')return wrap(lvlIntro('📝','Niveau 1 — Induction Room','Vocabulaire',
+    '<p style="font-weight:700;margin-bottom:7px">Welcome to the Sunshine Playroom!</p><p style="color:#666;font-size:.9rem">10 questions de vocabulaire. Seuil ≥ 8/10 • ⏱ 7 minutes</p>',
+    "go('l1q1',{qs:Q1,cur:0,ans:{},done:false,lbl:'L1-Ex1'})"),1);
+  if(sc==='l1q1')return wrap(`<div class="c"><span class="tag" style="background:#FF6B6B;color:#fff;margin-bottom:12px">Ex. 1</span> <strong>QCM Vocabulaire</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vQCM()}</div>`,1);
+  if(sc==='l1q2')return wrap(`<div class="ko">💪 Score insuffisant — exercice de rattrapage !</div><div class="c"><span class="tag" style="background:#FF9F43;color:#fff;margin-bottom:12px">Rattrapage</span> <strong>QCM Vocabulaire (2)</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vQCM()}</div>`,1);
+  if(sc==='l1d')return wrap(indice(0)+btn('Niveau suivant →',"go('l2i')",'yellow',true),1);
+  if(sc==='l2i')return wrap(lvlIntro('📖','Niveau 2 — Intelligence Desk','Compréhension écrite',
+    '<p style="font-weight:700;margin-bottom:7px">A file has been found!</p><p style="color:#666;font-size:.9rem">Les 2 exercices sont <strong>obligatoires</strong>. ≥ 8/10 aux deux pour avancer.</p><p style="color:#FF6B6B;font-weight:700;font-size:.86rem;margin-top:7px">⚠️ Échec = −25 pts + retour Niveau 1</p>',
+    "go('l2vf',{qs:VF,text:T1,ans:{},done:false})"),2);
+  if(sc==='l2vf')return wrap(`<div class="c"><span class="tag" style="background:#4ECDC4;color:#fff;margin-bottom:12px">Ex. 1/2</span> <strong>Vrai / Faux</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vVF()}</div>`,2);
+  if(sc==='l2qm')return wrap(`<div class="c"><span class="tag" style="background:#4ECDC4;color:#fff;margin-bottom:12px">Ex. 2/2</span> <strong>QCM — Texte 2</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0"><div class="rtxt"><strong style="color:#FF9F43">Afternoon at the Sunshine Playroom</strong><br><br>${T2.replace(/\n\n/g,'<br><br>')}</div>${vQCM()}</div>`,2);
+  if(sc==='l2fl')return wrap(`<div class="c" style="text-align:center;padding:30px 20px"><div style="font-size:2.5rem;margin-bottom:8px">😅</div><h2 style="color:#FF6B6B;font-weight:800;margin-bottom:10px">Score insuffisant</h2><p style="color:#666;margin-bottom:14px">≥ 80% requis aux deux exercices.</p><div class="ko">−25 points appliqués • Retour Niveau 1</div><br>${btn('🔄 Retour Niveau 1',"go('l1i')",'coral',true)}</div>`,2);
+  if(sc==='l2d')return wrap(indice(1)+btn('Niveau suivant →',"go('l3i')",'yellow',true),2);
+  if(sc==='l3i')return wrap(lvlIntro('🎤','Niveau 3 — Situation Room','Expression orale',
+    '<p style="font-weight:700;margin-bottom:7px">It\'s your turn to speak!</p><p style="color:#666;font-size:.9rem">Un membre est tiré au sort. Il lit la carte et parle en anglais.</p><p style="color:#666;font-style:italic;font-size:.88rem;margin-top:7px">⚠️ No notes. No preparation. Use your own words!</p>',
+    "startOral()"),3);
+  if(sc==='l3or')return wrap(vOral(SIT[S.l3i||0]),3);
+  if(sc==='l3d')return wrap(indice(2)+btn('Niveau suivant →',"go('l4i')",'yellow',true),3);
+  if(sc==='l4i')return wrap(lvlIntro('🔗','Niveau 4 — The Programme Room','Correspondance',
+    '<p style="font-weight:700;margin-bottom:7px">The programme files are scrambled!</p><p style="color:#666;font-size:.9rem">Associez chaque mot à sa définition. ⏱ 6 min recommandées • ≥ 8/10</p>',
+    "go('l4e1',{ps:M1,sh:shuf(M1.map((_,i)=>i)),sel:null,mt:{},done:false,lbl:'L4-Ex1'})"),4);
+  if(sc==='l4e1')return wrap(`<div class="c"><span class="tag" style="background:#C77DFF;color:#fff;margin-bottom:12px">Ex. 1</span> <strong>Correspondance — Série 1</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vMatch()}</div>`,4);
+  if(sc==='l4e2')return wrap(`<div class="ko">💪 Rattrapage — nouvelle série !</div><div class="c"><span class="tag" style="background:#FF9F43;color:#fff;margin-bottom:12px">Rattrapage</span> <strong>Correspondance — Série 2</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vMatch()}</div>`,4);
+  if(sc==='l4d')return wrap(indice(3)+btn('Niveau suivant →',"go('l5i')",'yellow',true),4);
+  if(sc==='l5i')return wrap(lvlIntro('📋','Niveau 5 — Director\'s Office','Compte rendu oral',
+    '<p style="font-weight:700;margin-bottom:7px">Final mission!</p><p style="color:#666;font-size:.9rem">Lisez la fiche d\'incident et présentez un compte rendu oral en anglais.</p><p style="color:#666;font-style:italic;font-size:.88rem;margin-top:7px">⚠️ No notes. Simple sentences. You can do it!</p>',
+    "startRep()"),5);
+  if(sc==='l5or')return wrap(vOral(REP[S.l5i||0],true),5);
+  if(sc==='l5d')return wrap(indice(4)+btn('Entrer le Code Final →',"go('fin')",'yellow',true),5);
+  if(sc==='fin')return wrap(vFinal(),5);
+  if(sc==='vic')return wrap(vVictory(),5);
+  if(sc==='rep')return vReport();
+  return'<p>Écran inconnu</p>';
+}
+
+/* ═══ HOME ═══ */
+function vHome(){
+  return `<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between">
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:28px 18px">
+      <div style="text-align:center;max-width:500px">
+        <div style="font-size:3.8rem;margin-bottom:10px">🌟</div>
+        <h1 style="font-size:1.9rem;font-weight:800;color:#FF6B6B;margin-bottom:6px">Save the Sunshine Playroom</h1>
+        <p style="color:#FF9F43;font-weight:700;margin-bottom:5px">🎮 English Escape Game — Bac Pro AEPA</p>
+        <p style="color:#888;font-size:.9rem;margin-bottom:30px">Animateurs en herbe, votre mission commence maintenant !</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <div class="c" style="flex:1;min-width:165px;max-width:210px;text-align:center">
+            <div style="font-size:2.3rem;margin-bottom:8px">👨‍🎓</div>
+            <div style="font-weight:800;color:#4ECDC4;margin-bottom:4px">Élèves</div>
+            <div style="color:#888;font-size:.83rem;margin-bottom:14px">Rejoindre la mission</div>
+            ${btn("C'est parti ! 🚀","go('slg')",'teal',true)}
+          </div>
+          <div class="c" style="flex:1;min-width:165px;max-width:210px;text-align:center">
+            <div style="font-size:2.3rem;margin-bottom:8px">👩‍🏫</div>
+            <div style="font-weight:800;color:#C77DFF;margin-bottom:4px">Professeur</div>
+            <div style="color:#888;font-size:.83rem;margin-bottom:14px">Gérer le jeu</div>
+            ${btn('Accès prof 🔑',"go('tlg')",'purple',true)}
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer style="text-align:center;padding:14px;color:#AAA;font-size:.8rem;border-top:1px solid #F0F0F0">
+      Créé par <strong style="color:#FF9F43">C. iemfre</strong> &nbsp;|&nbsp;
+      <span style="color:#4ECDC4;cursor:pointer;font-weight:700" onclick="go('rgpd')">🔒 RGPD</span>
+    </footer>
+  </div>`;
+}
+
+/* ═══ LOGIN ═══ */
+function vLogin(title,next){
+  return `<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div class="c" style="max-width:380px;width:100%">
+      <div style="color:#AAA;cursor:pointer;font-size:.85rem;margin-bottom:14px" onclick="go('home')">← Retour</div>
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:2.6rem">${title.split(' ')[0]}</div>
+        <h2 style="color:#4ECDC4;font-weight:800;font-size:1.6rem;margin-top:6px">${title.split(' ').slice(1).join(' ')}</h2>
+      </div>
+      <input id="lgcode" type="password" placeholder="Entrez le code d'accès" style="margin-bottom:9px"
+        onkeydown="if(event.key==='Enter')doLogin('${next}')">
+      <div id="lgerr" style="color:#FF6B6B;font-weight:700;font-size:.85rem;min-height:18px;margin-bottom:8px"></div>
+      ${btn('Accéder →',`doLogin('${next}')`,'blue',true)}
+    </div>
+  </div>`;
+}
+function doLogin(next){
+  const v=(document.getElementById('lgcode')||{}).value||'';
+  const exp=next==='tdb'?S.tc:S.sc;
+  if(v===exp){go(next);}
+  else{const el=document.getElementById('lgerr');if(el)el.textContent='Code incorrect. Réessayez.';}
+}
+
+/* ═══ TEACHER ═══ */
+function vTeacher(){
+  return `<div style="min-height:100vh;padding:20px">
+    <div style="max-width:700px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-top:8px">
+        <h2 style="color:#C77DFF;font-weight:800;font-size:1.6rem">👩‍🏫 Interface Professeur</h2>
+        ${btn('← Accueil',"go('home')",'gray')}
+      </div>
+      <div class="c">
+        <h3 style="color:#4ECDC4;font-weight:800;margin-bottom:12px">🔑 Code d'accès élèves</h3>
+        <p style="color:#888;margin-bottom:10px;font-size:.9rem">Code actuel : <strong style="color:#4ECDC4;font-family:monospace;font-size:1.2rem">${S.sc}</strong></p>
+        <div style="display:flex;gap:10px">
+          <input id="newsc" type="text" placeholder="Nouveau code" value="${S.sc}" style="flex:1">
+          ${btn('Enregistrer','saveNewCode()','blue')}
+        </div>
+        <div id="scsaved" style="color:#6BCB77;font-weight:700;font-size:.85rem;min-height:18px;margin-top:6px"></div>
+      </div>
+      <div class="c">
+        <h3 style="color:#FF9F43;font-weight:800;margin-bottom:12px">📋 Infos du jeu</h3>
+        ${[['Code maître final','WE PLAY AND LEARN TOGETHER (indices révélés dans le désordre)'],
+           ['Points','+50 pts par exercice réussi (≥80%) • −25 pts si échec Niveau 2'],
+           ['Niveau 2','Les DEUX exercices sont obligatoires. ≥80% aux deux pour avancer.'],
+           ['Niveaux oraux (3 & 5)','Validation manuelle avec votre code professeur.']
+        ].map(([k,v])=>`<div style="background:#FFF8EE;padding:10px 13px;border-radius:10px;margin-bottom:8px"><strong style="color:#FF9F43">${k} :</strong> <span style="color:#666;font-size:.88rem">${v}</span></div>`).join('')}
+      </div>
+      <div class="c">
+        <h3 style="color:#6BCB77;font-weight:800;margin-bottom:12px">🎓 Critères oraux</h3>
+        <div style="background:#EDFAEF;padding:11px 13px;border-radius:10px;border:1px solid #6BCB77;margin-bottom:9px"><strong style="color:#2D7A3A">Niveau 3 :</strong> <span style="color:#555;font-size:.88rem">Communication simple, vocabulaire petite enfance, attitude bienveillante.</span></div>
+        <div style="background:#EDFAEF;padding:11px 13px;border-radius:10px;border:1px solid #6BCB77"><strong style="color:#2D7A3A">Niveau 5 :</strong> <span style="color:#555;font-size:.88rem">Structure who/what/when/action/result, phrases simples et correctes.</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+function saveNewCode(){
+  const v=(document.getElementById('newsc')||{}).value||'';
+  if(v)S.sc=v;
+  const el=document.getElementById('scsaved');
+  if(el){el.textContent='✓ Code mis à jour !';setTimeout(()=>{if(el)el.textContent='';},2200);}
+}
+
+/* ═══ GROUP SETUP ═══ */
+function vGroup(){
+  const n=S.np||1;
+  const rows=Array.from({length:n},(_,i)=>`
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center">
+      <input id="fn${i}" type="text" placeholder="CA" value="${F['fn'+i]||''}" oninput="F['fn${i}']=this.value.toUpperCase().slice(0,2);renderChip(${i})" style="text-align:center;font-weight:800;font-family:monospace;letter-spacing:.12em">
+      <input id="ln${i}" type="text" placeholder="IE" value="${F['ln${i}']||''}" oninput="F['ln${i}']=this.value.toUpperCase().slice(0,2);renderChip(${i})" style="text-align:center;font-weight:800;font-family:monospace;letter-spacing:.12em">
+      <div id="chip${i}" style="text-align:center">${F['fn'+i]&&F['ln'+i]?`<span style="background:#4ECDC4;color:#fff;padding:3px 10px;border-radius:50px;font-size:.78rem;font-weight:800">${F['fn'+i]}-${F['ln'+i]}</span>`:'<span style="color:#DDD;font-weight:800">--</span>'}</div>
+      <button onclick="if(${n}>1){S.np--;F={};render();}" style="width:28px;height:28px;border:none;background:${n>1?'#FF6B6B':'#EEE'};color:${n>1?'#fff':'#CCC'};border-radius:50%;cursor:${n>1?'pointer':'not-allowed'};font-weight:800">×</button>
+    </div>`).join('');
+  return `<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div class="c" style="max-width:540px;width:100%">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:2.6rem">👥</div>
+        <h2 style="color:#FF6B6B;font-weight:800;font-size:1.6rem;margin-top:6px">Présentation du groupe</h2>
+        <p style="color:#888;font-size:.85rem;margin-top:4px">Identifiez-vous avant de commencer</p>
+      </div>
+      <label style="font-weight:700;display:block;margin-bottom:6px;font-size:.9rem">🏷️ Nom du groupe</label>
+      <input id="gname" type="text" placeholder="Ex : Les Super Animateurs" value="${F.gname||''}" oninput="F.gname=this.value" style="margin-bottom:16px">
+      <label style="font-weight:700;display:block;margin-bottom:6px;font-size:.9rem">👤 Participants (${n}/4)</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;background:#F8F8F8;padding:8px 10px;border-radius:9px">
+        ${['2 lettres prénom','2 lettres nom','ID',''].map(h=>`<div style="font-size:.7rem;font-weight:800;color:#AAA;text-align:center">${h}</div>`).join('')}
+      </div>
+      ${rows}
+      ${n<4?`<div style="margin-bottom:14px">${btn('+ Ajouter','addPart()','gray',false,true)}</div>`:''}
+      <div id="gerr" style="color:#FF6B6B;font-weight:700;font-size:.85rem;min-height:18px;margin-bottom:10px"></div>
+      ${btn('🚀 Lancer la mission !','startGame()','coral',true)}
+    </div>
+  </div>`;
+}
+function renderChip(i){
+  const el=document.getElementById('chip'+i);
+  if(!el)return;
+  const fn=(F['fn'+i]||'').slice(0,2),ln=(F['ln'+i]||'').slice(0,2);
+  el.innerHTML=fn&&ln?`<span style="background:#4ECDC4;color:#fff;padding:3px 10px;border-radius:50px;font-size:.78rem;font-weight:800">${fn}-${ln}</span>`:'<span style="color:#DDD;font-weight:800">--</span>';
+}
+function addPart(){if(S.np<4)S.np++;render();}
+function startGame(){
+  const name=(document.getElementById('gname')||{}).value||F.gname||'';
+  if(!name.trim()){const el=document.getElementById('gerr');if(el)el.textContent='Entrez le nom du groupe';return;}
+  const parts=[];
+  for(let i=0;i<(S.np||1);i++){
+    const fn=(F['fn'+i]||'').trim().toUpperCase().slice(0,2);
+    const ln=(F['ln'+i]||'').trim().toUpperCase().slice(0,2);
+    if(!fn||!ln){const el=document.getElementById('gerr');if(el)el.textContent='Remplissez tous les participants';return;}
+    parts.push({fn,ln});
+  }
+  S.sh=shuf([0,1,2,3,4]);S.rv=[];S.res={};S.wr=[];S.pts=0;
+  S.g={n:name.trim(),p:parts};S.t0=Date.now();S.t1=null;
+  S.l2s1=null;S.l3i=0;S.l5i=0;F={};
+  go('l1i');
+}
+
+/* ═══ QCM ═══ */
+function vQCM(){
+  const{qs,cur=0,ans={},done=false}=E;
+  if(!qs)return'';
+  const q=qs[cur];const L='ABCD';const CC=['#FF6B6B','#4ECDC4','#FFD93D','#C77DFF'];
+  const dots=qs.map((_,i)=>{
+    const c=done?(ans[i]===qs[i].c?'#6BCB77':'#FF6B6B'):(ans[i]!=null?'#4ECDC4':'#DDD');
+    return `<div onclick="E.cur=${i};render()" style="width:9px;height:9px;border-radius:50%;background:${c};cursor:pointer;display:inline-block;margin:2px"></div>`;
+  }).join('');
+  const opts=q.o.map((opt,oi)=>{
+    let bc='#E8E8E8',bg='#fff';
+    if(ans[cur]===oi){bc='#4ECDC4';bg='#E5F9F8';}
+    if(done&&oi===q.c){bc='#6BCB77';bg='#EDFAEF';}
+    if(done&&ans[cur]===oi&&oi!==q.c){bc='#FF6B6B';bg='#FFF0F0';}
+    const cbg=ans[cur]===oi?CC[oi]:'#F0F0F0',ct=ans[cur]===oi?'#fff':'#999';
+    const mk=done?(oi===q.c?' ✓':(ans[cur]===oi?' ✗':'')):'';
+    return `<div class="opt" onclick="${done?'':`E.ans[${cur}]=${oi};render()`}" style="border-color:${bc};background:${bg}">
+      <div style="width:28px;height:28px;border-radius:50%;background:${cbg};color:${ct};display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;flex-shrink:0">${L[oi]}</div>
+      <span style="flex:1">${opt}</span><span>${mk}</span>
+    </div>`;
+  }).join('');
+  const allA=Object.keys(ans).length===qs.length;
+  const score=qs.filter((_,i)=>ans[i]===qs[i].c).length;
+  const bot=done
+    ?`<div style="display:flex;gap:10px;width:100%;align-items:center;flex-wrap:wrap">
+       <div class="${score>=8?'ok':'ko'}" style="flex:1;margin:0">${score}/${qs.length} ${score>=8?'✓ Réussi !':'✗ Insuffisant'}</div>
+       ${btn('Continuer →','qcmDone()','green')}</div>`
+    :(allA?btn('✅ Valider','E.done=true;render()','coral'):`<small style="color:#CCC;font-size:.8rem">${Object.keys(ans).length}/${qs.length} répondues</small>`);
+  return `<div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+      <span style="color:#AAA;font-size:.82rem;font-weight:700">Question ${cur+1}/${qs.length}</span>
+      <div>${dots}</div>
+    </div>
+    <div style="background:#FFF8EE;border-radius:11px;padding:13px;margin-bottom:12px;font-weight:700;font-size:.93rem">${q.q}</div>
+    ${opts}
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;gap:7px">
+        ${cur>0?btn('← Préc.',`E.cur=${cur-1};render()`,'gray',false,true):''}
+        ${cur<qs.length-1?btn('Suiv. →',`E.cur=${cur+1};render()`,'teal',false,true):''}
+      </div>
+      ${bot}
+    </div>
+  </div>`;
+}
+function qcmDone(){
+  const{qs,ans={},lbl=''}=E;
+  const score=qs.filter((_,i)=>ans[i]===qs[i].c).length;
+  const wrong=qs.flatMap((q,i)=>ans[i]!==q.c?[{level:lbl,question:q.q,userAnswer:ans[i]!=null?q.o[ans[i]]:'—',correctAnswer:q.o[q.c]}]:[]);
+  S.wr.push(...wrong);
+  if(S.scr==='l1q1'){
+    S.res['L1-Ex1']={score,passed:pass(score)};
+    if(pass(score)){S.pts+=50;go('l1d');}
+    else go('l1q2',{qs:Q2,cur:0,ans:{},done:false,lbl:'L1-Ex2'});
+  }else if(S.scr==='l1q2'){
+    S.res['L1-Ex2']={score,passed:pass(score)};
+    if(pass(score))S.pts+=50;
+    go('l1d');
+  }else if(S.scr==='l2qm'){
+    S.res['L2-QCM']={score,passed:pass(score)};
+    if(pass(S.l2s1)&&pass(score)){S.pts+=100;go('l2d');}
+    else{S.pts=Math.max(0,S.pts-25);go('l2fl');}
+  }
+}
+
+/* ═══ V/F ═══ */
+function vVF(){
+  const{qs,text,ans={},done=false}=E;
+  if(!qs)return'';
+  const score=qs.filter((q,i)=>ans[i]===q.a).length;
+  const rows=qs.map((q,i)=>{
+    const bg=done?(ans[i]===q.a?'#EDFAEF':'#FFF0F0'):'#fff';
+    const bc=done?(ans[i]===q.a?'#6BCB77':'#FF6B6B'):'#E8E8E8';
+    return `<div class="vfr" style="background:${bg};border-color:${bc}">
+      <span style="width:22px;height:22px;background:#FFD93D;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0">${i+1}</span>
+      <span style="flex:1;font-weight:600;font-size:.88rem">${q.s}</span>
+      <button onclick="${done?'':`E.ans[${i}]=true;render()`}" style="background:${ans[i]===true?'#6BCB77':'#fff'};color:${ans[i]===true?'#fff':'#6BCB77'};border:2px solid #6BCB77;border-radius:50px;padding:5px 13px;font-size:.8rem;font-weight:700;cursor:pointer">TRUE</button>
+      <button onclick="${done?'':`E.ans[${i}]=false;render()`}" style="background:${ans[i]===false?'#FF6B6B':'#fff'};color:${ans[i]===false?'#fff':'#FF6B6B'};border:2px solid #FF6B6B;border-radius:50px;padding:5px 13px;font-size:.8rem;font-weight:700;cursor:pointer">FALSE</button>
+      ${done?`<span>${ans[i]===q.a?'✓':'✗'}</span>`:''}
+    </div>`;
+  }).join('');
+  const allA=Object.keys(ans).length===qs.length;
+  const bot=done
+    ?`<div style="display:flex;gap:10px;width:100%;align-items:center;flex-wrap:wrap">
+       <div class="${score>=8?'ok':'ko'}" style="flex:1;margin:0">${score}/${qs.length} ${score>=8?'✓ Réussi !':'✗ Insuffisant'}</div>
+       ${btn('Continuer →','vfDone()','green')}</div>`
+    :btn('✅ Valider',`E.done=true;render()`,'coral',false,!allA);
+  return `<div class="rtxt"><strong style="color:#FF9F43">A Day at the Sunshine Playroom</strong><br><br>${text.replace(/\n\n/g,'<br><br>')}</div>${rows}
+    <div style="margin-top:12px;display:flex;justify-content:flex-end">${bot}</div>`;
+}
+function vfDone(){
+  const{qs,ans={}}=E;
+  const score=qs.filter((q,i)=>ans[i]===q.a).length;
+  const wrong=qs.flatMap((q,i)=>ans[i]!==q.a?[{level:'L2-VF',question:q.s,userAnswer:ans[i]?'TRUE':'FALSE',correctAnswer:q.a?'TRUE':'FALSE'}]:[]);
+  S.wr.push(...wrong);S.res['L2-VF']={score,passed:pass(score)};S.l2s1=score;
+  go('l2qm',{qs:Q3,cur:0,ans:{},done:false,lbl:'L2-QCM'});
+}
+
+/* ═══ MATCHING ═══ */
+function vMatch(){
+  const{ps,sh,sel,mt={},done=false}=E;
+  if(!ps)return'';
+  const usedD=Object.values(mt);
+  const words=ps.map((p,i)=>{
+    const isM=mt[i]!=null,ok2=done&&mt[i]===i,ko=done&&isM&&mt[i]!==i;
+    let bc=ok2?'#6BCB77':ko?'#FF6B6B':sel===i?'#C77DFF':isM?'#C77DFF':'#E8E8E8';
+    let bg=ok2?'#EDFAEF':ko?'#FFF0F0':sel===i?'#F3E8FF':'#fff';
+    return `<div class="mi" onclick="${done||isM?'':`selectW(${i})`}" style="border-color:${bc};background:${bg}${done||isM?';cursor:default':''}">
+      <strong style="flex:1">${p.w}</strong>
+      ${isM&&!done?'<span style="color:#C77DFF;font-size:.75rem">✓</span>':''}
+      ${ok2?'<span style="color:#6BCB77">✓</span>':''}${ko?'<span style="color:#FF6B6B">✗</span>':''}
+    </div>`;
+  }).join('');
+  const defs=sh.map(orig=>{
+    const isU=usedD.includes(orig);
+    const mKey=Object.keys(mt).find(k=>mt[k]===orig);
+    const ok2=done&&mKey!=null&&Number(mKey)===orig;
+    const ko=done&&isU&&!ok2;
+    return `<div class="mi" onclick="${isU?'':`selectD(${orig})`}" style="border-color:${ok2?'#6BCB77':ko?'#FF6B6B':'#E8E8E8'};background:${ok2?'#EDFAEF':ko?'#FFF0F0':'#fff'}${isU&&!done?';opacity:.45':''}${isU?';cursor:default':''}">${ps[orig].d}</div>`;
+  }).join('');
+  const allM=Object.keys(mt).length===ps.length;
+  const score=ps.filter((_,i)=>mt[i]===i).length;
+  const bot=done
+    ?`<div style="display:flex;gap:10px;width:100%;align-items:center;flex-wrap:wrap">
+       <div class="${score>=8?'ok':'ko'}" style="flex:1;margin:0">${score}/${ps.length} ${score>=8?'✓ Réussi !':'✗ Insuffisant'}</div>
+       ${btn('Continuer →','matchDone()','green')}</div>`
+    :(allM?btn('✅ Valider',`E.done=true;render()`,'coral'):`<small style="color:#CCC;font-size:.8rem">${Object.keys(mt).length}/${ps.length} associés</small>`);
+  return `<p style="color:#AAA;font-size:.83rem;margin-bottom:11px;font-weight:700">① Cliquez un mot → ② Cliquez sa définition</p>
+    <div class="mg"><div><div style="font-weight:800;color:#C77DFF;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Mots</div>${words}</div>
+    <div><div style="font-weight:800;color:#FF9F43;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Définitions</div>${defs}</div></div>
+    <div style="margin-top:13px;display:flex;justify-content:flex-end">${bot}</div>`;
+}
+function selectW(i){if(E.done||E.mt[i]!=null)return;E.sel=E.sel===i?null:i;render();}
+function selectD(orig){
+  if(E.done||Object.values(E.mt||{}).includes(orig)||E.sel==null)return;
+  if(!E.mt)E.mt={};E.mt[E.sel]=orig;E.sel=null;render();
+}
+function matchDone(){
+  const{ps,mt={},lbl=''}=E;
+  const score=ps.filter((_,i)=>mt[i]===i).length;
+  const wrong=ps.flatMap((p,i)=>mt[i]!==i?[{level:lbl,question:`Match: ${p.w}`,userAnswer:mt[i]!=null?ps[mt[i]]?.d:'—',correctAnswer:p.d}]:[]);
+  S.wr.push(...wrong);
+  if(S.scr==='l4e1'){
+    S.res['L4-Ex1']={score,passed:pass(score)};
+    if(pass(score)){S.pts+=50;go('l4d');}
+    else go('l4e2',{ps:M2,sh:shuf(M2.map((_,i)=>i)),sel:null,mt:{},done:false,lbl:'L4-Ex2'});
+  }else{
+    S.res['L4-Ex2']={score,passed:pass(score)};
+    if(pass(score))S.pts+=50;
+    go('l4d');
+  }
+}
+
+/* ═══ ORAL ═══ */
+function startOral(){S.l3i=0;go('l3or',{step:'reading'});}
+function startRep(){S.l5i=0;go('l5or',{step:'reading'});}
+function vOral(content,isRep=false){
+  const step=E.step||'reading';
+  let body='';
+  if(step==='reading'){
+    const inner=isRep
+      ?`<div class="sit"><div class="slbl">📋 Rapport d'incident</div><div style="font-weight:700;font-size:.95rem;margin-bottom:3px">${content.t}</div><div style="color:#888;font-size:.8rem;margin-bottom:11px">${content.i}</div><div style="font-size:.88rem;line-height:1.75;margin-bottom:11px">${content.x}</div></div>`
+      :`<div class="sit"><div class="slbl">📍 Où</div><div class="sval">${content.w}</div><div class="slbl">👤 Qui</div><div class="sval">${content.who}</div><div class="slbl">🎭 Rôle</div><div class="sval">${content.r}</div></div>`;
+    body=`${inner}<div class="hint" style="margin-top:13px;margin-bottom:16px">💡 ${content.h}</div><div style="text-align:center"><p style="color:#888;margin-bottom:11px;font-size:.88rem">Lisez la carte, préparez-vous mentalement.</p>${btn('🎤 Je commence','E.step="presenting";render()','coral')}</div>`;
+  }else if(step==='presenting'){
+    body=`<div style="background:#F0FFFE;border-radius:13px;padding:20px;text-align:center"><p style="font-weight:700;color:#4ECDC4;margin-bottom:15px">L'élève présente son oral en anglais…</p>${btn('👩‍🏫 Validation Professeur','E.step="modal-code";render()','purple')}</div>`;
+  }else if(step==='modal-code'){
+    body=`<div style="background:#F8F0FF;border:2px solid #C77DFF;border-radius:14px;padding:22px">
+      <div style="text-align:center;margin-bottom:16px"><div style="font-size:2.2rem">👩‍🏫</div><h3 style="color:#4ECDC4;font-weight:800;margin-top:5px">Validation Professeur</h3><p style="color:#888;font-size:.83rem;margin-top:3px">Entrez votre code pour valider l'oral</p></div>
+      <input id="tc" type="password" placeholder="Code professeur" style="margin-bottom:9px" onkeydown="if(event.key==='Enter')checkTC()">
+      <div id="tcerr" style="color:#FF6B6B;font-weight:700;font-size:.85rem;min-height:18px;margin-bottom:8px"></div>
+      ${btn('Valider le code →','checkTC()','blue',true)}
+    </div>`;
+  }else if(step==='modal-validate'){
+    body=`<div style="background:#F8F0FF;border:2px solid #C77DFF;border-radius:14px;padding:22px;text-align:center">
+      <div style="font-size:2.2rem;margin-bottom:8px">🎤</div>
+      <h3 style="color:#FF9F43;font-weight:800;margin-bottom:5px">Résultat de l'oral</h3>
+      <p style="color:#888;font-size:.83rem;margin-bottom:18px">L'élève a-t-il réussi ?</p>
+      <div style="display:flex;gap:14px">${btn('✅ Réussi','oralPass()','green',true)}${btn('❌ À refaire','oralFail()','coral',true)}</div>
+    </div>`;
+  }
+  return `<div class="c"><div style="text-align:center;margin-bottom:14px"><div style="font-size:2rem">${content.e}</div><h3 style="font-weight:800;color:#FF9F43;font-size:1.3rem;margin-top:4px">${content.t}</h3></div>${body}</div>`;
+}
+function checkTC(){
+  const v=(document.getElementById('tc')||{}).value||'';
+  if(v===S.tc){E.step='modal-validate';render();}
+  else{const el=document.getElementById('tcerr');if(el)el.textContent='Code incorrect';}
+}
+function oralPass(){
+  if(S.scr==='l3or'){S.res['L3-Oral']={passed:true};S.pts+=50;go('l3d');}
+  else{S.res['L5-Oral']={passed:true};S.pts+=50;go('l5d');}
+}
+function oralFail(){
+  if(S.scr==='l3or'){
+    S.res['L3-Oral']={passed:false};
+    if((S.l3i||0)<SIT.length-1){S.l3i++;E={step:'reading'};render();}
+    else go('l3d');
+  }else{
+    S.res['L5-Oral']={passed:false};
+    if((S.l5i||0)<REP.length-1){S.l5i++;E={step:'reading'};render();}
+    else go('l5d');
+  }
+}
+
+/* ═══ FINAL CODE ═══ */
+function vFinal(){
+  const chips=S.rv.map(w=>`<span style="background:#FF9F43;color:#fff;padding:6px 15px;border-radius:50px;font-weight:800;display:inline-block;margin:3px">${w}</span>`).join('');
+  return `<div class="c">
+    <div style="text-align:center;margin-bottom:20px"><div style="font-size:3rem">🔐</div>
+      <h2 style="font-size:1.7rem;font-weight:800;color:#FF6B6B;margin-top:7px">Code Final</h2>
+      <p style="color:#888;font-size:.9rem;margin-top:4px">Arrangez vos 5 fragments pour former la phrase secrète</p>
+    </div>
+    <div style="background:#FFF8EE;border-radius:12px;padding:15px;margin-bottom:18px">
+      <div style="font-weight:800;color:#FF9F43;margin-bottom:9px">🧩 Vos fragments collectés :</div>
+      <div>${chips}</div>
+      <p style="color:#888;font-size:.78rem;margin-top:9px">⚠️ Ils sont dans le désordre — trouvez la bonne phrase !</p>
+    </div>
+    <label style="font-weight:700;display:block;margin-bottom:7px;font-size:.9rem">✍️ Entrez la phrase complète :</label>
+    <input id="fc" type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _" style="font-size:1rem;text-align:center;letter-spacing:.04em;margin-bottom:9px" onkeydown="if(event.key==='Enter')checkFinal()">
+    <div id="ferr" style="color:#FF6B6B;font-weight:700;font-size:.85rem;min-height:18px;margin-bottom:10px"></div>
+    <div style="text-align:center">${btn('🔓 Ouvrir le Sunshine Playroom !','checkFinal()','coral')}</div>
+  </div>`;
+}
+function checkFinal(){
+  const v=((document.getElementById('fc')||{}).value||'').trim().toUpperCase().replace(/\s+/g,' ');
+  if(v==='WE PLAY AND LEARN TOGETHER'){S.t1=Date.now();go('vic');}
+  else{const el=document.getElementById('ferr');if(el)el.textContent=`❌ Code incorrect. Réarrangez vos ${S.rv.length} fragments !`;}
+}
+
+/* ═══ VICTORY ═══ */
+function vVictory(){
+  const dur=ftm(S.t0,S.t1);
+  const parts=S.g.p.map(p=>`<span style="background:#4ECDC4;color:#fff;padding:3px 11px;border-radius:50px;font-size:.8rem;font-weight:700">${p.fn}-${p.ln}</span>`).join(' ');
+  return `<div style="background:#FF9F43;border-radius:18px;padding:30px;text-align:center;color:#fff;margin-bottom:18px">
+    <div style="font-size:2.8rem;margin-bottom:8px">🎉🌟🎊🏆</div>
+    <h1 style="font-size:1.9rem;font-weight:800;margin-bottom:7px">Mission accomplie !</h1>
+    <p style="opacity:.9;margin-bottom:4px">Le Sunshine Playroom est sauvé ! 🌈</p>
+    <div style="font-weight:800;font-size:1.2rem;margin-top:13px;background:rgba(255,255,255,.2);padding:9px 20px;border-radius:50px;display:inline-block">WE PLAY AND LEARN TOGETHER ✓</div>
   </div>
-</div>
-<div class="sec">
-  <h3>🎯 Résultats par niveau</h3>
-  <table><tr><th>Niveau</th><th>Résultat</th><th>Détail</th></tr>
-  ${Object.entries(state.results||{}).map(([k,v])=>`<tr><td><strong>${lNames[k]||k}</strong></td><td>${v.passed===true?'<span class="pass">✓ Réussi</span>':v.passed===false?'<span class="fail">✗ Non réussi</span>':'<span style="color:#CCC">—</span>'}</td><td style="color:#888">${v.score!=null?`${v.score}/10`:typeof v.passed==='boolean'?v.passed?'Oral réussi':'Oral non réussi':'—'}</td></tr>`).join('')}
-  </table>
-</div>
-${Object.keys(byLvl).length>0?`
-<div class="sec" style="border-left-color:#FF6B6B">
-  <h3 style="color:#FF6B6B">❌ Erreurs commises</h3>
-  ${Object.entries(byLvl).map(([lv,ws])=>`
-  <div style="margin-bottom:14px"><h4 style="color:#FF9F43;margin-bottom:8px;font-size:.9rem">${lNames[lv]||lv}</h4>
-  ${ws.map(w=>`<div class="err-item"><div class="err-q">❓ ${w.question}</div><div class="err-u">✗ Donné : ${w.userAnswer||'—'}</div><div class="err-c">✓ Correct : ${w.correctAnswer}</div></div>`).join('')}
-  </div>`).join('')}
-</div>`:`<div class="sec" style="border-left-color:#6BCB77;text-align:center;padding:22px"><div style="font-size:1.8rem">🏆</div><h3 style="color:#6BCB77;margin-top:6px">Aucune erreur !</h3></div>`}
-<div class="code">✅ Code maître débloqué : WE PLAY AND LEARN TOGETHER</div>
-<div class="foot">Créé par C. iemfre &nbsp;•&nbsp; Save the Sunshine Playroom — English Escape Game Bac Pro AEPA<br><em>Rapport généré le ${now}</em></div>
-<script>window.onload=()=>setTimeout(()=>window.print(),600);</script>
-</body></html>`;
-  const w=window.open('','_blank');w.document.write(html);w.document.close();
+  <div class="c">
+    <h3 style="font-weight:800;color:#FF9F43;margin-bottom:13px">📊 Résumé de mission</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div style="background:#FFF8EE;padding:13px;border-radius:12px;text-align:center"><div style="font-size:2rem;font-weight:800;color:#FF6B6B">${S.pts}</div><div style="color:#888;font-size:.83rem">Points</div></div>
+      <div style="background:#FFF8EE;padding:13px;border-radius:12px;text-align:center"><div style="font-size:1.45rem;font-weight:800;color:#4ECDC4">${dur}</div><div style="color:#888;font-size:.83rem">Durée</div></div>
+    </div>
+    <div style="margin-bottom:14px"><strong style="font-size:.9rem">👥 Groupe : </strong><span style="color:#FF6B6B">${S.g.n}</span><br><div style="margin-top:6px">${parts}</div></div>
+    ${btn('📥 Voir & Imprimer le rapport','go("rep")','coral',true)}
+  </div>`;
 }
 
-/* ═══════════════════════════════════════
-   MAIN APP
-═══════════════════════════════════════ */
-function App(){
-  const [st,setSt]=useState({
-    screen:'home',teacherCode:'0504',studentCode:'1234',
-    group:{name:'',participants:[]},
-    score:0,shuffled:[],revealed:[],
-    results:{},wrongs:[],
-    startTime:null,endTime:null,
-    phase:'intro',
-    l2Ex1Score:null,
-    l3Idx:0,l5Idx:0
-  });
-  function up(patch){setSt(s=>({...s,...patch}));}
-
-  // ── ROUTING ──
-  if(st.screen==='home')return<HomeScreen setState={setSt}/>;
-  if(st.screen==='rgpd')return<RGPDScreen onBack={()=>up({screen:'home'})}/>;
-  if(st.screen==='teacher-login')return<LoginScreen title="Espace Professeur" emoji="👩‍🏫" expectedCode={st.teacherCode} onSuccess={()=>up({screen:'teacher-dashboard'})} onBack={()=>up({screen:'home'})}/>;
-  if(st.screen==='teacher-dashboard')return<TeacherDashboard state={st} setState={setSt}/>;
-  if(st.screen==='student-login')return<LoginScreen title="Espace Élèves" emoji="👨‍🎓" expectedCode={st.studentCode} onSuccess={()=>up({screen:'group-setup'})} onBack={()=>up({screen:'home'})}/>;
-  if(st.screen==='group-setup')return<GroupSetup onStart={(name,parts)=>{
-    const sh=shuffle([0,1,2,3,4]);
-    up({screen:'level1',phase:'intro',group:{name,participants:parts},score:0,shuffled:sh,revealed:[],results:{},wrongs:[],startTime:Date.now(),endTime:null,l2Ex1Score:null,l3Idx:0,l5Idx:0});
-  }}/>;
-
-  // ── LEVEL 1 ──
-  if(st.screen==='level1'){
-    if(st.phase==='intro')return<><GameHeader state={st} level={1}/><LvlIntro emoji="📝" title="Niveau 1 — Induction Room" sub="Vocabulaire de l'animation" color="#FF6B6B" onStart={()=>up({phase:'ex1'})} desc={<><p style={{fontWeight:700,color:'#444',marginBottom:7}}>Welcome to the Sunshine Playroom!</p><p style={{color:'#666',fontSize:'.9rem'}}>Répondez à 10 questions sur le vocabulaire de l'animation et de la petite enfance.</p><p style={{color:'#888',fontSize:'.85rem',marginTop:8}}>⏱ Timer : <strong>7 minutes</strong> &nbsp;•&nbsp; Seuil : <strong>≥ 8/10</strong></p></>}/></>;
-
-    const doEx1=(score,wrong)=>{
-      const p=passes(score);
-      const newR={...st.results,'Niveau 1 — Ex 1':{score,passed:p}};
-      const newW=[...st.wrongs,...wrong];
-      const indice=WORDS[st.shuffled[0]];
-      if(p){up({score:st.score+50,results:newR,wrongs:newW,revealed:[...st.revealed,indice],phase:'indice'});}
-      else{up({results:newR,wrongs:newW,phase:'ex2'});}
-    };
-    const doEx2=(score,wrong)=>{
-      const p=passes(score);
-      const newR={...st.results,'Niveau 1 — Ex 2':{score,passed:p}};
-      const indice=WORDS[st.shuffled[0]];
-      up({score:st.score+(p?50:0),results:newR,wrongs:[...st.wrongs,...wrong],revealed:[...st.revealed,indice],phase:'indice'});
-    };
-
-    if(st.phase==='ex1')return<><GameHeader state={st} level={1}/><div className="container" style={{paddingTop:22}}><div className="card"><div style={{display:'flex',gap:8,alignItems:'center',marginBottom:14}}><div style={{background:'#FF6B6B',color:'#fff',borderRadius:50,padding:'3px 13px',fontWeight:800,fontFamily:'Fredoka One',fontSize:'.9rem'}}>Ex. 1</div><h3 style={{fontFamily:'Fredoka One',color:'#444'}}>QCM — Vocabulaire</h3></div><QCMEx questions={L1E1} label="Niveau 1 — Ex 1" onDone={doEx1}/></div></div></>;
-    if(st.phase==='ex2')return<><GameHeader state={st} level={1}/><div className="container" style={{paddingTop:22}}><div className="banner-ko" style={{marginBottom:14}}>💪 Score insuffisant — exercice de rattrapage !</div><div className="card"><div style={{display:'flex',gap:8,alignItems:'center',marginBottom:14}}><div style={{background:'#FF9F43',color:'#fff',borderRadius:50,padding:'3px 13px',fontWeight:800,fontFamily:'Fredoka One',fontSize:'.9rem'}}>Rattrapage</div><h3 style={{fontFamily:'Fredoka One',color:'#444'}}>QCM — Vocabulaire (2)</h3></div><QCMEx questions={L1E2} label="Niveau 1 — Ex 2" onDone={doEx2}/></div></div></>;
-    if(st.phase==='indice'){const ind=WORDS[st.shuffled[0]];return<><GameHeader state={st} level={1}/><IndiceReveal indice={ind} collected={st.revealed} onNext={()=>up({screen:'level2',phase:'intro',l2Ex1Score:null})}/></>;}
-  }
-
-  // ── LEVEL 2 ──
-  if(st.screen==='level2'){
-    if(st.phase==='intro')return<><GameHeader state={st} level={2}/><LvlIntro emoji="📖" title="Niveau 2 — Intelligence Desk" sub="Compréhension écrite" color="#4ECDC4" onStart={()=>up({phase:'ex1'})} desc={<><p style={{fontWeight:700,color:'#444',marginBottom:7}}>A file has been found!</p><p style={{color:'#666',fontSize:'.9rem'}}>Lisez les deux textes et répondez aux questions.</p><p style={{color:'#FF6B6B',fontWeight:700,marginTop:8,fontSize:'.88rem'}}>⚠️ Les deux exercices sont obligatoires. Il faut ≥ 8/10 aux DEUX pour avancer.</p><p style={{color:'#888',fontSize:'.82rem',marginTop:4}}>En cas d'échec : −25 points et retour au Niveau 1.</p></>}/></>;
-
-    if(st.phase==='ex1')return<><GameHeader state={st} level={2}/><div className="container" style={{paddingTop:22}}><div className="card"><div style={{display:'flex',gap:8,alignItems:'center',marginBottom:14}}><div style={{background:'#4ECDC4',color:'#fff',borderRadius:50,padding:'3px 13px',fontWeight:800,fontFamily:'Fredoka One',fontSize:'.9rem'}}>Ex. 1 / 2</div><h3 style={{fontFamily:'Fredoka One',color:'#444'}}>Vrai / Faux</h3></div><VFEx questions={L2E1} text={T1} onDone={(score,wrong)=>{up({results:{...st.results,'Niveau 2 — Vrai/Faux':{score,passed:passes(score)}},wrongs:[...st.wrongs,...wrong],l2Ex1Score:score,phase:'ex2'});}}/></div></div></>;
-
-    if(st.phase==='ex2')return<><GameHeader state={st} level={2}/><div className="container" style={{paddingTop:22}}><div className="card"><div style={{display:'flex',gap:8,alignItems:'center',marginBottom:14}}><div style={{background:'#4ECDC4',color:'#fff',borderRadius:50,padding:'3px 13px',fontWeight:800,fontFamily:'Fredoka One',fontSize:'.9rem'}}>Ex. 2 / 2</div><h3 style={{fontFamily:'Fredoka One',color:'#444'}}>QCM — Texte 2</h3></div><div style={{background:'#F0FFFE',borderRadius:11,padding:'10px 14px',marginBottom:14,fontWeight:600,color:'#4ECDC4',fontSize:'.86rem'}}>📌 Ex.1 complété. Finissez cet exercice pour connaître votre résultat global.</div><div className="reading-text"><div style={{fontWeight:800,color:'#FF9F43',marginBottom:8,fontStyle:'normal',fontSize:'.88rem'}}>📄 Afternoon at the Sunshine Playroom</div>{T2.split('\n\n').map((p,i)=><p key={i} style={{marginBottom:8}}>{p}</p>)}</div><QCMEx questions={L2E2} label="Niveau 2 — QCM" onDone={(score,wrong)=>{
-      const ex1p=passes(st.l2Ex1Score),ex2p=passes(score);
-      const newR={...st.results,'Niveau 2 — QCM':{score,passed:ex2p}};
-      const newW=[...st.wrongs,...wrong];
-      if(ex1p&&ex2p){const ind=WORDS[st.shuffled[1]];up({score:st.score+100,results:newR,wrongs:newW,revealed:[...st.revealed,ind],phase:'indice'});}
-      else{up({score:Math.max(0,st.score-25),results:newR,wrongs:newW,phase:'fail'});}
-    }}/></div></div></>;
-
-    if(st.phase==='fail')return<><GameHeader state={st} level={2}/><div className="container fadein" style={{paddingTop:36}}><div className="card"><div style={{textAlign:'center'}}><div style={{fontSize:'2.8rem'}}>😅</div><h2 className="fredoka" style={{color:'#FF6B6B',fontSize:'1.7rem',marginTop:8}}>Score insuffisant</h2><p style={{color:'#888',marginTop:8,marginBottom:16,fontSize:'.9rem'}}>Il faut ≥ 80% aux deux exercices pour passer au Niveau 3.</p><div className="banner-ko" style={{marginBottom:22}}>−25 points appliqués &nbsp;•&nbsp; Retour au Niveau 1</div><Btn color="coral" size="lg" onClick={()=>up({screen:'level1',phase:'intro'})}>🔄 Retour Niveau 1</Btn></div></div></div></>;
-
-    if(st.phase==='indice'){const ind=WORDS[st.shuffled[1]];return<><GameHeader state={st} level={2}/><IndiceReveal indice={ind} collected={st.revealed} onNext={()=>up({screen:'level3',phase:'intro',l3Idx:0})}/></>;}
-  }
-
-  // ── LEVEL 3 ──
-  if(st.screen==='level3'){
-    const sit=SITUATIONS[st.l3Idx||0];
-    if(st.phase==='intro')return<><GameHeader state={st} level={3}/><LvlIntro emoji="🎤" title="Niveau 3 — Situation Room" sub="Expression orale" color="#FF9F43" onStart={()=>up({phase:'oral'})} desc={<><p style={{fontWeight:700,color:'#444',marginBottom:7}}>It's your turn to speak!</p><p style={{color:'#666',fontSize:'.9rem'}}>Un membre du groupe est tiré au sort. Il lit la carte et parle en anglais.</p><p style={{color:'#888',marginTop:8,fontStyle:'italic',fontSize:'.88rem'}}>⚠️ No notes. No preparation time. Use your own words!</p><p style={{color:'#666',marginTop:7,fontSize:'.88rem'}}>✅ Le professeur valide avec son code.</p></>}/></>;
-    if(st.phase==='oral')return<><GameHeader state={st} level={3}/><OralCard content={sit} tCode={st.teacherCode} onResult={ok=>{
-      const newR={...st.results,'Niveau 3 — Oral':{passed:ok}};
-      const ind=WORDS[st.shuffled[2]];
-      if(ok){up({score:st.score+50,results:newR,revealed:[...st.revealed,ind],phase:'indice'});}
-      else if((st.l3Idx||0)===0){up({results:newR,l3Idx:1});}
-      else{up({results:newR,revealed:[...st.revealed,ind],phase:'indice'});}
-    }}/></>;
-    if(st.phase==='indice'){const ind=WORDS[st.shuffled[2]];return<><GameHeader state={st} level={3}/><IndiceReveal indice={ind} collected={st.revealed} onNext={()=>up({screen:'level4',phase:'intro'})}/></>;}
-  }
-
-  // ── LEVEL 4 ──
-  if(st.screen==='level4'){
-    if(st.phase==='intro')return<><GameHeader state={st} level={4}/><LvlIntro emoji="🔗" title="Niveau 4 — The Programme Room" sub="Exercice de correspondance" color="#C77DFF" onStart={()=>up({phase:'ex1'})} desc={<><p style={{fontWeight:700,color:'#444',marginBottom:7}}>The programme files are scrambled!</p><p style={{color:'#666',fontSize:'.9rem'}}>Associez chaque mot à sa définition correcte.</p><p style={{color:'#888',marginTop:8,fontSize:'.85rem'}}>⏱ Timer recommandé : <strong>6 minutes</strong> &nbsp;•&nbsp; Seuil : <strong>≥ 8/10</strong></p></>}/></>;
-
-    const doM1=(score,wrong)=>{
-      const p=passes(score);const ind=WORDS[st.shuffled[3]];const newR={...st.results,'Niveau 4 — Ex 1':{score,passed:p}};
-      if(p){up({score:st.score+50,results:newR,wrongs:[...st.wrongs,...wrong],revealed:[...st.revealed,ind],phase:'indice'});}
-      else{up({results:newR,wrongs:[...st.wrongs,...wrong],phase:'ex2'});}
-    };
-    const doM2=(score,wrong)=>{
-      const p=passes(score);const ind=WORDS[st.shuffled[3]];
-      up({score:st.score+(p?50:0),results:{...st.results,'Niveau 4 — Ex 2':{score,passed:p}},wrongs:[...st.wrongs,...wrong],revealed:[...st.revealed,ind],phase:'indice'});
-    };
-
-    if(st.phase==='ex1')return<><GameHeader state={st} level={4}/><div className="container" style={{paddingTop:22}}><div className="card"><div style={{display:'flex',gap:8,alignItems:'center',marginBottom:14}}><div style={{background:'#C77DFF',color:'#fff',borderRadius:50,padding:'3px 13px',fontWeight:800,fontFamily:'Fredoka One',fontSize:'.9rem'}}>Ex. 1</div><h3 style={{fontFamily:'Fredoka One',color:'#444'}}>Correspondance — Série 1</h3></div><MatchEx pairs={L4E1} label="Niveau 4 — Ex 1" onDone={doM1}/></div></div></>;
-    if(st.phase==='ex2')return<><GameHeader state={st} level={4}/><div className="container" style={{paddingTop:22}}><div className="banner-ko" style={{marginBottom:14}}>💪 Rattrapage — nouvelle série !</div><div className="card"><div style={{display:'flex',gap:8,alignItems:'center',marginBottom:14}}><div style={{background:'#FF9F43',color:'#fff',borderRadius:50,padding:'3px 13px',fontWeight:800,fontFamily:'Fredoka One',fontSize:'.9rem'}}>Rattrapage</div><h3 style={{fontFamily:'Fredoka One',color:'#444'}}>Correspondance — Série 2</h3></div><MatchEx pairs={L4E2} label="Niveau 4 — Ex 2" onDone={doM2}/></div></div></>;
-    if(st.phase==='indice'){const ind=WORDS[st.shuffled[3]];return<><GameHeader state={st} level={4}/><IndiceReveal indice={ind} collected={st.revealed} onNext={()=>up({screen:'level5',phase:'intro',l5Idx:0})}/></>;}
-  }
-
-  // ── LEVEL 5 ──
-  if(st.screen==='level5'){
-    const rep=REPORTS[st.l5Idx||0];
-    if(st.phase==='intro')return<><GameHeader state={st} level={5}/><LvlIntro emoji="📋" title="Niveau 5 — Director's Office" sub="Compte rendu oral" color="#6BCB77" onStart={()=>up({phase:'oral'})} desc={<><p style={{fontWeight:700,color:'#444',marginBottom:7}}>Final mission! The Director needs your report.</p><p style={{color:'#666',fontSize:'.9rem'}}>Lisez la fiche d'incident et présentez un compte rendu oral en anglais.</p><p style={{color:'#888',marginTop:8,fontStyle:'italic',fontSize:'.88rem'}}>⚠️ No notes. Simple sentences. You can do it!</p></>}/></>;
-    if(st.phase==='oral')return<><GameHeader state={st} level={5}/><OralCard content={rep} tCode={st.teacherCode} onResult={ok=>{
-      const ind=WORDS[st.shuffled[4]];const newR={...st.results,'Niveau 5 — Oral':{passed:ok}};
-      if(ok){up({score:st.score+50,results:newR,revealed:[...st.revealed,ind],phase:'indice'});}
-      else if((st.l5Idx||0)<REPORTS.length-1){up({results:newR,l5Idx:(st.l5Idx||0)+1});}
-      else{up({results:newR,revealed:[...st.revealed,ind],phase:'indice'});}
-    }}/></>;
-    if(st.phase==='indice'){const ind=WORDS[st.shuffled[4]];return<><GameHeader state={st} level={5}/><IndiceReveal indice={ind} collected={st.revealed} onNext={()=>up({screen:'final'})}/></>;}
-  }
-
-  // ── FINAL CODE ──
-  if(st.screen==='final')return<><GameHeader state={st} level={5}/><FinalCode collected={st.revealed} onSuccess={()=>up({screen:'victory',endTime:Date.now()})}/></>;
-
-  // ── VICTORY ──
-  if(st.screen==='victory')return<><GameHeader state={st} level={5}/><VictoryScreen state={st} onReport={()=>generateReport(st)}/></>;
-
-  return<div style={{padding:40,textAlign:'center'}}>Écran inconnu</div>;
+/* ═══ REPORT ═══ */
+function vReport(){
+  const dur=ftm(S.t0,S.t1);
+  const parts=S.g.p.map(p=>`<span style="background:#4ECDC4;color:#fff;padding:3px 10px;border-radius:50px;font-size:.78rem;font-weight:700">${p.fn}-${p.ln}</span>`).join(' ');
+  const LN={'L1-Ex1':'📝 Vocabulaire Ex.1','L1-Ex2':'📝 Vocabulaire (Rattrapage)','L2-VF':'📖 Lecture V/F','L2-QCM':'📖 Lecture QCM','L3-Oral':'🎤 Expression orale','L4-Ex1':'🔗 Correspondance Ex.1','L4-Ex2':'🔗 Correspondance (Rattrapage)','L5-Oral':'📋 Compte rendu oral'};
+  const rows=Object.entries(S.res).map(([k,v])=>`<tr style="border-bottom:1px solid #F0F0F0">
+    <td style="padding:9px;font-weight:700;font-size:.87rem">${LN[k]||k}</td>
+    <td style="padding:9px"><span style="background:${v.passed?'#6BCB77':'#FF6B6B'};color:#fff;padding:2px 9px;border-radius:50px;font-size:.75rem;font-weight:800">${v.passed?'✓ Réussi':'✗ Non réussi'}</span></td>
+    <td style="padding:9px;color:#888;font-size:.87rem">${v.score!=null?`${v.score}/10`:typeof v.passed==='boolean'?(v.passed?'Oral réussi':'Non réussi'):'—'}</td>
+  </tr>`).join('');
+  const errHTML=S.wr.length===0
+    ?`<div class="ok" style="text-align:center">🏆 Aucune erreur !</div>`
+    :S.wr.map(w=>`<div style="background:#fff;border:1px solid #FFE0E0;border-radius:9px;padding:11px;margin-bottom:8px">
+        <div style="font-weight:700;font-size:.87rem">❓ ${w.question}</div>
+        <div style="color:#FF6B6B;font-size:.82rem;margin-top:3px">✗ Donné : ${w.userAnswer||'—'}</div>
+        <div style="color:#6BCB77;font-size:.82rem">✓ Correct : ${w.correctAnswer}</div>
+      </div>`).join('');
+  return `<div id="report" style="max-width:760px;margin:0 auto;padding:20px">
+    <div class="noprint" style="margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap">
+      ${btn('← Retour victoire',"go('vic')",'gray')}
+      ${btn('🖨️ Imprimer / Sauvegarder PDF','window.print()','orange')}
+    </div>
+    <div style="background:#FF9F43;border-radius:18px;padding:26px;text-align:center;color:#fff;margin-bottom:18px">
+      <div style="font-weight:800;font-size:1.7rem">🌟 Save the Sunshine Playroom</div>
+      <div style="opacity:.9;font-size:.9rem;margin-top:4px">English Escape Game — Bac Pro AEPA • Rapport de mission</div>
+      <div style="opacity:.75;font-size:.8rem;margin-top:5px">${new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="c" style="text-align:center"><div style="font-weight:800;font-size:1rem;color:#333">${S.g.n}</div><div style="color:#888;font-size:.8rem">Groupe</div></div>
+      <div class="c" style="text-align:center"><div style="font-size:1.8rem;font-weight:800;color:#FF6B6B">${S.pts}</div><div style="color:#888;font-size:.8rem">Points / Durée : ${dur}</div></div>
+    </div>
+    <div class="c"><div style="font-weight:800;margin-bottom:8px">👥 Participants</div>${parts}</div>
+    <div class="c">
+      <h3 style="font-weight:800;color:#FF9F43;margin-bottom:12px">🎯 Résultats par niveau</h3>
+      <table style="width:100%;border-collapse:collapse">
+        <tr style="background:#FFF8EE"><th style="padding:9px;text-align:left;font-size:.82rem;font-weight:800">Niveau</th><th style="padding:9px;text-align:left;font-size:.82rem;font-weight:800">Résultat</th><th style="padding:9px;text-align:left;font-size:.82rem;font-weight:800">Score</th></tr>
+        ${rows}
+      </table>
+    </div>
+    <div class="c">
+      <h3 style="font-weight:800;color:#FF6B6B;margin-bottom:12px">❌ Erreurs commises</h3>
+      ${errHTML}
+    </div>
+    <div style="background:#FF9F43;border-radius:14px;padding:14px 20px;text-align:center;font-weight:800;font-size:1.3rem;color:#fff;margin-bottom:14px">✅ Code maître : WE PLAY AND LEARN TOGETHER</div>
+    <div style="text-align:center;color:#AAA;font-size:.78rem">Créé par C. iemfre • Save the Sunshine Playroom — English Escape Game Bac Pro AEPA</div>
+  </div>`;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+/* ═══ RGPD ═══ */
+function vRGPD(){
+  return `<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div class="c" style="max-width:500px;width:100%">
+      <div style="color:#AAA;cursor:pointer;font-size:.85rem;margin-bottom:14px" onclick="go('home')">← Retour</div>
+      <div style="text-align:center;margin-bottom:18px"><div style="font-size:2.6rem">🔒</div><h2 style="color:#4ECDC4;font-weight:800;margin-top:6px">Politique RGPD</h2></div>
+      <div style="background:#FFF8EE;border-radius:12px;padding:16px;color:#777;line-height:1.85;font-size:.9rem">
+        <p style="font-weight:700;color:#444;margin-bottom:10px">Cette page sera complétée ultérieurement.</p>
+        <p>Les données saisies dans cette application (nom de groupe, identifiants participants) ne sont pas transmises à des serveurs tiers et restent uniquement en mémoire le temps de la session.</p>
+        <p style="margin-top:10px">Aucune donnée n'est conservée après fermeture de la page.</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ═══ INIT ═══ */
+render();
 </script>
 </body>
 </html>
