@@ -215,37 +215,38 @@ function lvlIntro(e,t,s,desc,fn){
 function view(){
   const sc=S.scr;
   if(sc==='home')return vHome();
+  if(sc==='rules')return vRules();
   if(sc==='rgpd')return vRGPD();
   if(sc==='tlg')return vLogin('👩‍🏫 Interface Professeur','tdb');
   if(sc==='tdb')return vTeacher();
   if(sc==='slg')return vLogin('👨‍🎓 Connexion Élèves','grp');
   if(sc==='grp')return vGroup();
-  if(sc==='l1i')return wrap(lvlIntro('📝','Niveau 1 — Induction Room','Vocabulaire',
-    '<p style="font-weight:700;margin-bottom:7px">Welcome to the Sunshine Playroom!</p><p style="color:#666;font-size:.9rem">10 questions de vocabulaire. Seuil ≥ 8/10 • ⏱ 7 minutes</p>',
+  if(sc==='l1i')return wrap(lvlIntro('📝','Niveau 1 — Induction Room','Vocabulaire de l\'animation',
+    '<p style="font-weight:700;margin-bottom:7px">Welcome to the Sunshine Playroom!</p><p style="color:#666;font-size:.88rem;line-height:1.72">Avant d\'entrer dans la salle, vous devez prouver que vous maîtrisez le vocabulaire essentiel de l\'animation et de la petite enfance. Les enfants attendent — montrez que vous êtes prêts !</p><p style="color:#888;margin-top:8px;font-size:.83rem">⏱ 7 minutes · Seuil de réussite : <strong>≥ 8/10</strong> · En cas d\'échec : exercice de rattrapage disponible</p>',
     "go('l1q1',{qs:Q1,cur:0,ans:{},done:false,lbl:'L1-Ex1'})"),1);
   if(sc==='l1q1')return wrap(`<div class="c"><span class="tag" style="background:#FF6B6B;color:#fff;margin-bottom:12px">Ex. 1</span> <strong>QCM Vocabulaire</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vQCM()}</div>`,1);
   if(sc==='l1q2')return wrap(`<div class="ko">💪 Score insuffisant — exercice de rattrapage !</div><div class="c"><span class="tag" style="background:#FF9F43;color:#fff;margin-bottom:12px">Rattrapage</span> <strong>QCM Vocabulaire (2)</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vQCM()}</div>`,1);
   if(sc==='l1d')return wrap(indice(0)+btn('Niveau suivant →',"go('l2i')",'yellow',true),1);
   if(sc==='l2i')return wrap(lvlIntro('📖','Niveau 2 — Intelligence Desk','Compréhension écrite',
-    '<p style="font-weight:700;margin-bottom:7px">A file has been found!</p><p style="color:#666;font-size:.9rem">Les 2 exercices sont <strong>obligatoires</strong>. ≥ 8/10 aux deux pour avancer.</p><p style="color:#FF6B6B;font-weight:700;font-size:.86rem;margin-top:7px">⚠️ Échec = −25 pts + retour Niveau 1</p>',
+    '<p style="font-weight:700;margin-bottom:7px">Un rapport a été retrouvé dans la salle !</p><p style="color:#666;font-size:.88rem;line-height:1.72">Deux documents décrivent ce qui s\'est passé ce matin au Sunshine Playroom. Lisez-les attentivement et répondez aux questions pour prouver que vous avez compris la situation.</p><p style="color:#FF6B6B;font-weight:700;font-size:.84rem;margin-top:8px">⚠️ Les 2 exercices sont <strong>obligatoires</strong>. Il faut ≥ 8/10 aux deux pour avancer.<br>En cas d\'échec : −25 pts et retour au Niveau 1.</p>',
     "go('l2vf',{qs:VF,text:T1,ans:{},done:false})"),2);
   if(sc==='l2vf')return wrap(`<div class="c"><span class="tag" style="background:#4ECDC4;color:#fff;margin-bottom:12px">Ex. 1/2</span> <strong>Vrai / Faux</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vVF()}</div>`,2);
   if(sc==='l2qm')return wrap(`<div class="c"><span class="tag" style="background:#4ECDC4;color:#fff;margin-bottom:12px">Ex. 2/2</span> <strong>QCM — Texte 2</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0"><div class="rtxt"><strong style="color:#FF9F43">Afternoon at the Sunshine Playroom</strong><br><br>${T2.replace(/\n\n/g,'<br><br>')}</div>${vQCM()}</div>`,2);
   if(sc==='l2fl')return wrap(`<div class="c" style="text-align:center;padding:30px 20px"><div style="font-size:2.5rem;margin-bottom:8px">😅</div><h2 style="color:#FF6B6B;font-weight:800;margin-bottom:10px">Score insuffisant</h2><p style="color:#666;margin-bottom:14px">≥ 80% requis aux deux exercices.</p><div class="ko">−25 points appliqués • Retour Niveau 1</div><br>${btn('🔄 Retour Niveau 1',"go('l1i')",'coral',true)}</div>`,2);
   if(sc==='l2d')return wrap(indice(1)+btn('Niveau suivant →',"go('l3i')",'yellow',true),2);
   if(sc==='l3i')return wrap(lvlIntro('🎤','Niveau 3 — Situation Room','Expression orale',
-    '<p style="font-weight:700;margin-bottom:7px">It\'s your turn to speak!</p><p style="color:#666;font-size:.9rem">Un membre est tiré au sort. Il lit la carte et parle en anglais.</p><p style="color:#666;font-style:italic;font-size:.88rem;margin-top:7px">⚠️ No notes. No preparation. Use your own words!</p>',
+    '<p style="font-weight:700;margin-bottom:7px">Un enfant a besoin d\'aide !</p><p style="color:#666;font-size:.88rem;line-height:1.72">Une situation réelle vient de se produire au Sunshine Playroom. Un membre de l\'équipe est tiré au sort. Il lit la carte de situation et intervient immédiatement en anglais — sans notes, sans préparation. C\'est le moment de montrer votre sens du contact !</p><p style="color:#888;font-size:.84rem;margin-top:8px;font-style:italic">⚠️ No notes. No preparation time. Use your own words!<br>Le professeur valide la prestation avec son code.</p>',
     "startOral()"),3);
   if(sc==='l3or')return wrap(vOral(SIT[S.l3i||0]),3);
   if(sc==='l3d')return wrap(indice(2)+btn('Niveau suivant →',"go('l4i')",'yellow',true),3);
-  if(sc==='l4i')return wrap(lvlIntro('🔗','Niveau 4 — The Programme Room','Correspondance',
-    '<p style="font-weight:700;margin-bottom:7px">The programme files are scrambled!</p><p style="color:#666;font-size:.9rem">Associez chaque mot à sa définition. ⏱ 6 min recommandées • ≥ 8/10</p>',
+  if(sc==='l4i')return wrap(lvlIntro('🔗','Niveau 4 — The Programme Room','Correspondance terminologique',
+    '<p style="font-weight:700;margin-bottom:7px">Les fiches du programme sont mélangées !</p><p style="color:#666;font-size:.88rem;line-height:1.72">Pour reconstruire le planning d\'activités, vous devez associer chaque terme professionnel de l\'animation à sa définition exacte. Précision et rapidité sont vos meilleurs alliés.</p><p style="color:#888;font-size:.84rem;margin-top:8px">⏱ 6 minutes recommandées · Seuil de réussite : <strong>≥ 8/10</strong><br>En cas d\'échec : exercice de rattrapage avec une nouvelle série de termes.</p>',
     "go('l4e1',{ps:M1,sh:shuf(M1.map((_,i)=>i)),sel:null,mt:{},done:false,lbl:'L4-Ex1'})"),4);
   if(sc==='l4e1')return wrap(`<div class="c"><span class="tag" style="background:#C77DFF;color:#fff;margin-bottom:12px">Ex. 1</span> <strong>Correspondance — Série 1</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vMatch()}</div>`,4);
   if(sc==='l4e2')return wrap(`<div class="ko">💪 Rattrapage — nouvelle série !</div><div class="c"><span class="tag" style="background:#FF9F43;color:#fff;margin-bottom:12px">Rattrapage</span> <strong>Correspondance — Série 2</strong><hr style="margin:12px 0;border:none;border-top:1px solid #F0F0F0">${vMatch()}</div>`,4);
   if(sc==='l4d')return wrap(indice(3)+btn('Niveau suivant →',"go('l5i')",'yellow',true),4);
-  if(sc==='l5i')return wrap(lvlIntro('📋','Niveau 5 — Director\'s Office','Compte rendu oral',
-    '<p style="font-weight:700;margin-bottom:7px">Final mission!</p><p style="color:#666;font-size:.9rem">Lisez la fiche d\'incident et présentez un compte rendu oral en anglais.</p><p style="color:#666;font-style:italic;font-size:.88rem;margin-top:7px">⚠️ No notes. Simple sentences. You can do it!</p>',
+  if(sc==='l5i')return wrap(lvlIntro('📋',"Niveau 5 — Director's Office",'Compte rendu oral',
+    '<p style="font-weight:700;margin-bottom:7px">Dernière mission — le directeur attend votre rapport !</p><p style="color:#666;font-size:.88rem;line-height:1.72">Un incident s\'est produit au Sunshine Playroom. Lisez la fiche d\'incident et présentez un compte rendu oral structuré en anglais. C\'est la dernière mission avant le Master Code — donnez le meilleur de vous-même !</p><p style="color:#888;font-size:.84rem;margin-top:8px;font-style:italic">⚠️ No notes. Simple sentences. Structure your report : who / what / when / action / result.<br>Le professeur valide la prestation avec son code.</p>',
     "startRep()"),5);
   if(sc==='l5or')return wrap(vOral(REP[S.l5i||0],true),5);
   if(sc==='l5d')return wrap(indice(4)+btn('Entrer le Code Final →',"go('fin')",'yellow',true),5);
@@ -269,7 +270,7 @@ function vHome(){
             <div style="font-size:2.3rem;margin-bottom:8px">👨‍🎓</div>
             <div style="font-weight:800;color:#4ECDC4;margin-bottom:4px">Élèves</div>
             <div style="color:#888;font-size:.83rem;margin-bottom:14px">Rejoindre la mission</div>
-            ${btn("C'est parti ! 🚀","go('slg')",'teal',true)}
+            ${btn("C'est parti ! 🚀","go('rules')",'teal',true)}
           </div>
           <div class="c" style="flex:1;min-width:165px;max-width:210px;text-align:center">
             <div style="font-size:2.3rem;margin-bottom:8px">👩‍🏫</div>
@@ -284,6 +285,62 @@ function vHome(){
       Créé par <strong style="color:#FF9F43">C. iemfre</strong> &nbsp;|&nbsp;
       <span style="color:#4ECDC4;cursor:pointer;font-weight:700" onclick="go('rgpd')">🔒 RGPD</span>
     </footer>
+  </div>`;
+}
+
+/* ═══ RULES ═══ */
+function vRules(){
+  const missions=[
+    {n:1,e:'📝',t:'Induction Room',d:'QCM vocabulaire — prouvez que vous connaissez les mots clés de l\'animation et de la petite enfance.',c:'#FF6B6B'},
+    {n:2,e:'📖',t:'Intelligence Desk',d:'Compréhension écrite — deux rapports d\'activité, deux exercices obligatoires. ≥ 80% aux deux pour avancer.',c:'#4ECDC4'},
+    {n:3,e:'🎤',t:'Situation Room',d:'Expression orale — gérez une situation avec un enfant en anglais devant votre équipe.',c:'#FF9F43'},
+    {n:4,e:'🔗',t:'The Programme Room',d:'Correspondance — associez les termes de l\'animation à leurs définitions exactes.',c:'#C77DFF'},
+    {n:5,e:'📋',t:"Director's Office",d:'Compte rendu oral — présentez un rapport d\'incident professionnel en anglais.',c:'#6BCB77'}
+  ];
+  return `<div style="min-height:100vh;padding-bottom:30px">
+    <div style="background:linear-gradient(135deg,#FF6B6B,#FF9F43);padding:28px 20px;text-align:center;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.07;background:radial-gradient(circle at 20% 50%,#fff 1px,transparent 1px) 0 0 / 28px 28px"></div>
+      <div style="position:relative">
+        <div style="font-size:2.8rem;margin-bottom:8px">🌟</div>
+        <h1 style="font-weight:800;font-size:1.85rem;margin-bottom:5px">Save the Sunshine Playroom</h1>
+        <p style="opacity:.9;font-size:.88rem">English Escape Game — Bac Pro AEPA</p>
+      </div>
+    </div>
+    <div style="max-width:760px;margin:0 auto;padding:16px 18px">
+      <!-- Contexte -->
+      <div class="c" style="border-left:4px solid #FF9F43;margin-top:4px">
+        <div style="font-weight:800;color:#FF9F43;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px">🚨 La situation</div>
+        <p style="color:#444;font-size:.9rem;line-height:1.78">Lundi matin. <strong>Le Sunshine Playroom est en danger !</strong> Les fichiers d'activités sont perdus. Le planning a disparu. Dix enfants attendent devant la porte. Votre équipe est la nouvelle équipe d'animation pour la journée. Complétez les 5 missions pour trouver les <strong>5 mots secrets</strong>. Recomposez la phrase pour entrer le <strong>Master Code</strong> et <strong>sauver le Sunshine Playroom</strong>.</p>
+      </div>
+      <!-- Missions -->
+      <div style="font-weight:800;color:#333;margin:16px 0 10px;font-size:.92rem">🗺️ Vos 5 missions</div>
+      <div style="display:grid;gap:8px;margin-bottom:16px">
+        ${missions.map(m=>`<div class="c" style="display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-left:4px solid ${m.c}">
+          <div style="width:36px;height:36px;border-radius:50%;background:${m.c};color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0">${m.e}</div>
+          <div><div style="font-weight:800;font-size:.9rem;color:#333">Mission ${m.n} — ${m.t}</div><div style="color:#777;font-size:.81rem;margin-top:3px;line-height:1.5">${m.d}</div></div>
+        </div>`).join('')}
+      </div>
+      <!-- Règles -->
+      <div class="c" style="border-top:3px solid #FFD93D;margin-bottom:16px">
+        <div style="font-weight:800;color:#FF9F43;margin-bottom:11px;font-size:.9rem">📐 Règles du jeu</div>
+        <div style="display:grid;gap:7px;font-size:.87rem">
+          ${[
+            ['⭐ Points','+50 pts par exercice réussi (≥ 80% de bonnes réponses).'],
+            ['⚠️ Mission 2','Les 2 exercices sont <strong>obligatoires</strong>. Échec = <strong>−25 pts</strong> + retour Mission 1.'],
+            ['🎤 Oral','Missions 3 & 5 : validation manuelle par le <strong>professeur</strong>.'],
+            ['🧩 Code secret','5 fragments révélés dans le désordre. Recomposez la phrase pour gagner.'],
+            ['📥 Rapport','Rapport PDF téléchargeable à la fin avec résultats et erreurs détaillées.']
+          ].map(([k,v])=>`<div style="display:flex;gap:10px;background:#FFF8EE;padding:9px 12px;border-radius:9px;align-items:flex-start">
+            <span style="flex-shrink:0;min-width:90px;font-weight:800;color:#FF9F43;font-size:.82rem">${k}</span>
+            <span style="color:#555">${v}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div style="text-align:center">
+        ${btn('✅ Accepter la mission',"go('slg')",'coral','lg')}
+        <div style="margin-top:10px">${btn('← Retour',"go('home')",'gray','sm')}</div>
+      </div>
+    </div>
   </div>`;
 }
 
